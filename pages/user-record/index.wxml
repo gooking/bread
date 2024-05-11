@@ -1,0 +1,20 @@
+<view class="my-integral-bar ">
+  <view class="price-bar">
+    <text>{{userAmount.score}}</text>p
+  </view>
+  <view class="go">我的积分</view>
+</view>
+
+<view class="blank"></view>
+
+<view wx:if="{{!logs}}" class="no-orders">暂无积分记录</view>
+<block wx:for="{{logs}}" wx:key="id">
+  <view class="name-bar">
+    <view class="name-box">
+      <view class="name">{{ item.typeStr }}</view>
+      <view class="time">{{ item.dateAdd }}</view>
+    </view>
+    <view class="price">{{ item.score }}</view>
+  </view>
+  <view class="blank"></view>
+</block>

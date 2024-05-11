@@ -1,0 +1,95 @@
+<view class="mycard"></view>
+<view wx:if="{{userInfo && userInfo.avatarUrl}}" class="card-bar">
+  <view class="card-box">
+    <image mode='aspectFill' class='my-photo' src='{{userInfo.avatarUrl}}'></image>
+    <view class="name">{{userInfo.nick}}</view>
+  </view>
+
+  <navigator url="/pages/card/index" hover-class="none">
+  <view class="card-title">
+    <view class="title">
+      <text>元气 Bread</text>会员卡
+    </view>
+    <image mode='aspectFill' class='go' src='/images/icon-font-solid-1@2x.png'></image>
+  </view>
+  </navigator>
+
+  <view class="logos-bar">
+    <image mode='aspectFill' class='logos1' src='/images/logo@2x.png'></image>
+    <view class="logos-box">
+      <image mode='aspectFill' class='logos2' src='/images/icon-4-card-normal@2x.png'></image>
+      <image mode='aspectFill' class='logos3' src='/images/icon-2-1-shop-cart-normal@2x.png'></image>
+      <image mode='aspectFill' class='logos4' src='/images/icon-2-menu-normal@2x.png'></image>
+    </view>
+  </view>
+</view>
+
+<view wx:else class="card-bar">
+  <view class="log-in">微信登录激活会员卡</view>
+  <view class="logos-bar">
+    <image mode='aspectFill' class='logos1' src='/images/logo@2x.png'></image>
+    <view class="logos-box">
+      <image mode='aspectFill' class='logos2' src='/images/icon-4-card-normal@2x.png'></image>
+      <image mode='aspectFill' class='logos3' src='/images/icon-2-1-shop-cart-normal@2x.png'></image>
+      <image mode='aspectFill' class='logos4' src='/images/icon-2-menu-normal@2x.png'></image>
+    </view>
+  </view>
+  <button bindtap="updateUserInfo"></button>
+</view>
+
+<view class="price-bar">
+  <text>{{userAmount.score}}</text>p
+</view>
+
+<block wx:if="{{canHX}}">
+<view class="content-bar" bindtap="scanOrderCode">
+  <image mode='aspectFill' class='icon' src='/images/user-icon-login@2x.png'></image>
+  <view class="content">扫码核销</view>
+</view>
+<view class="blank"></view>
+</block>
+<block wx:if="{{!userInfo || !userInfo.avatarUrl}}">
+<view class="content-bar">
+  <image mode='aspectFill' class='icon' src='/images/user-icon-login@2x.png'></image>
+  <view class="content">登陆激活会员身份</view>
+  <button bindtap="updateUserInfo"></button>
+</view>
+<view class="blank"></view>
+</block>
+<navigator url="/pages/card-info/index" hover-class="none">
+<view class="content-bar">
+  <image mode='aspectFill' class='icon' src='/images/user-icon-edit@2x.png'></image>
+  <view class="content">编辑会员卡信息</view>
+</view>
+</navigator>
+<view class="blank"></view>
+<view class="content-bar">
+  <image mode='aspectFill' class='icon' src='/images/user-icon-gift@2x.png'></image>
+  <view class="content hui">积分换取礼品（即将上线）</view>
+</view>
+<view class="blank"></view>
+<navigator url="/pages/user-record/index" hover-class="none">
+<view class="content-bar">
+  <image mode='aspectFill' class='icon' src='/images/user-icon-gift-recode@2x.png'></image>
+  <view class="content">积分记录</view>
+</view>
+</navigator>
+<view class="blank"></view>
+<navigator url="/pages/about-us/index" hover-class="none">
+<view class="content-bar">
+  <image mode='aspectFill' class='icon' src='/images/user-icon-about@2x.png'></image>
+  <view class="content">关于元气 Bread</view>
+</view>
+</navigator>
+<view class="blank"></view>
+<navigator url="/pages/about-us/detail?key=contact" hover-class="none">
+<view class="content-bar">
+  <image mode='aspectFill' class='icon' src='/images/user-icon-contact@2x.png'></image>
+  <view class="content">联系我们</view>
+</view>
+</navigator>
+
+<view class="bottom"></view>
+<!-- 底部导航栏 -->
+<import src="/template/tabbar/index.wxml" />
+<template is="tabbar" data="{{ tabbarActive: 3 }}" />

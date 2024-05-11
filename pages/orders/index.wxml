@@ -1,0 +1,105 @@
+<view class="orders-shops">
+  <view class="shops-box">门店</view>
+  <navigator url="/pages/all-stores/index" hover-class="none">
+    <view class="shops-name">
+      <view class="GO">{{ shopInfo.name }}</view>
+      <van-icon name="arrow" size="32rpx" color="#4a4a4a"/>
+    </view>
+  </navigator>
+</view>
+
+<view class="titles-bar">
+  <view class="title {{cid?'':'active'}}" data-id="0" bindtap="onCategoryClick">全部商品</view>
+  <view wx:for="{{goodsCategory}}" wx:key="id" class="title {{cid == item.id?'active':''}}" data-id="{{item.id}}" bindtap="onCategoryClick">{{ item.name }}</view>
+</view>
+
+
+<view class="goods-bigbar">
+  <view wx:if="{{!goodsList}}" class="no-orders">暂无商品</view>
+  <view wx:for="{{goodsList}}" wx:key="id" class="goods-bar">
+    <view class="goods-photo">
+    <image mode='aspectFill' class='photo' src='{{ item.pic }}' bind:tap="goDetail" data-id="{{ item.id }}"></image>
+    </view>
+
+    <view class="content">
+      <view class="titles">{{ item.name }}</view>
+      <view class="introduce">{{ item.characteristic }}</view>
+      <view class="price-bar">
+        <view class="price-box">
+          <view class="symbol">¥</view>
+          <view class="money">{{ item.minPrice }}</view>
+        </view>
+        <view class="add" data-index="{{ index }}" bindtap="addCart">＋</view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view wx:if="{{!shippingCarInfo}}" class="shop-cart">
+  <view class="cart-box">
+    <view class="cart">
+      <image mode='aspectFill' class='icon' src='/images/icon-2-1-shop-cart-normal@2x.png'></image>
+      <view class="txt">购物车</view>
+    </view>
+  </view>
+</view>
+
+<view wx:if="{{shippingCarInfo}}" class="shop-cart">
+  <view class="cart-box" bindtap="showCartList">
+    <view class="cart">
+      <image mode='aspectFill' class='icon' src='/images/icon-2-1-shop-cart-normal@2x.png'></image>
+      <view class="amount">
+        <text>¥</text>{{shippingCarInfo.price}}
+      </view>      
+    </view>
+    <view class="num">{{shippingCarInfo.number}}</view>
+  </view>
+  <navigator url="/pages/pay/index" hover-class="none"><view class="pay-btn">结算</view></navigator>
+</view>
+
+<van-popup
+  show="{{ showCartPop }}"
+  round
+  position="bottom"
+  custom-style="height: 70%"
+  bind:close="onClose">
+  <view class="shop-cart2">
+    <view class="cart-box">
+      <view class="cart">
+        <image mode='aspectFill' class='icon' src='/images/icon-2-1-shop-cart-normal@2x.png'></image>
+        <view class="amount">
+          <text>¥</text>{{shippingCarInfo.price}}
+        </view>
+      </view>
+      <view class="num">{{shippingCarInfo.number}}</view>
+    </view>
+    <view class="close" bindtap="hideCartList">×</view>
+  </view>
+  <view wx:for="{{shippingCarInfo.items}}" wx:key="key" class="goods-box">
+    <view class="photo-box">
+      <image mode='aspectFill' class='photos' src='{{item.pic}}'></image>
+    </view>
+    <view class="content-box">
+      <view class="title1">{{item.name}}</view>
+      <!-- <view class="title2">一般口味</view> -->
+      <view class="price-box">
+        <text>¥</text>{{item.price}}
+        <van-stepper value="{{ item.number }}" min="0" async-change input-width="48rpx" button-size="48rpx" custom-class="stepper" input-class="input" plus-class="plus" minus-class="minus" data-key="{{item.key}}" bind:change="changeNumber"/>
+      </view>
+    </view>
+  </view>
+  <view style="height:120rpx;"></view>
+  <view class="pay-bar">
+    <view class="pay-box">
+      <view class="title">总价</view>
+      <view class="price">
+        <text>¥</text>{{shippingCarInfo.price}}
+      </view>
+    </view>
+    <navigator url="/pages/pay/index" hover-class="none"><view class="pay-byn">结算</view></navigator>
+  </view>
+</van-popup>
+
+<!-- 底部导航栏 -->
+<import src="/template/tabbar/index.wxml" />
+<template is="tabbar" data="{{ tabbarActive: 1 }}" />

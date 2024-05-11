@@ -1,0 +1,5 @@
+<textarea class='describe' placeholder='请输入订单备注内容' model:value="{{remark}}" maxlength="200" />
+<view class="words-num">{{remark.length}}/200</view>
+<view class="blank"></view>
+<van-button type="primary" size="normal" custom-class="update" bindtap="ok">更新备注</van-button>
+<view wx:for="{{list}}" wx:key="*this" class="memark" bindtap="msgTap" data-msg="{{item}}"><text>{{item}}</text></view>

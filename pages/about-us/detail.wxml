@@ -1,0 +1,2 @@
+<view class="title">{{cmsPage.info.title}}</view>
+<view class="content"><parser html="{{cmsPage.info.content}}" /></view>

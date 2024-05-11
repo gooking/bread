@@ -1,0 +1,39 @@
+<view class="inc-bar">
+  <view class="inc-box">
+    <image mode='aspectFill' class='myinc' src='/images/icon-4-card-active@2x.png'></image>
+    <view class="p">{{ userAmount.score }}p</view>
+  </view>
+  <view class="slide">下滑查看会员卡</view>
+</view>
+
+<swiper class='focus' autoplay bindchange="bannerChange">
+  <swiper-item wx:for="{{banners}}" wx:key="id">
+    <image mode='aspectFill' class='focus' src='{{item.picUrl}}'></image>
+  </swiper-item>
+</swiper>
+<view class="Borders-box">
+  <view wx:for="{{banners}}" wx:key="id" class="Borders{{index == curbanner ? '':'1'}}"></view>
+</view>
+
+<view class="shop">
+  <view class="Nearby-stores">附近门店</view>
+  <navigator hover-class="none" url="/pages/all-stores/index"><view class="all-stores">所有门店</view></navigator>
+</view>
+
+<view class="shop-list">
+  <image mode='aspectFill' class='shop-logo1' src='/images/rectangle@2x.png'></image>
+  <navigator hover-class="none" url="/pages/orders/index">
+    <view class="shop-logo2">
+      <image mode='aspectFill' class='shop-logo' src='/images/logo@2x.png'></image>
+      <view class="shop-name">{{shop.name}}</view>
+      <view class="distance-bar">
+        <view class="distance">{{shop.distance}}km</view>
+        <image mode='aspectFill' class='arrow' src='/images/icon-font-solid@2x.png'></image>
+      </view>
+    </view>
+  </navigator>
+</view>
+
+<!-- 底部导航栏 -->
+<import src="/template/tabbar/index.wxml" />
+<template is="tabbar" data="{{ tabbarActive: 0 }}" />

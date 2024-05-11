@@ -1,0 +1,71 @@
+.my-integral-bar{
+  display: flex;
+  justify-content: space-between;
+}
+.my-integral-bar .price-bar{
+  margin-top: 30rpx;
+  margin-left: 30rpx;
+  margin-bottom: 40rpx;
+  font-size: 28rpx;
+  color: #3d3d3d;
+}
+.my-integral-bar .price-bar text{
+  font-size: 84rpx;
+  margin-right: 6rpx;
+}
+.my-integral-bar .go{
+  
+  font-size: 24rpx;
+  text-align: right;
+  color: #b3b3b3;
+  margin-top:30rpx ;
+  margin-right: 40rpx;
+}
+.blank{
+  width: 100vw;
+  height: 10rpx;
+  background-color: #f5f5f5;
+}
+
+.name-bar{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+}
+.name-bar .name-box{
+  margin-bottom: 32rpx;
+  margin-top: 32rpx;
+  margin-left:32rpx ;
+}
+.name-bar .name-box .name{
+  opacity: 0.9;
+  
+  font-size: 34rpx;
+  color: #000000;
+}
+.name-bar .name-box .time{
+  opacity: 0.5;
+  
+  font-size: 28rpx;
+  text-align: justify;
+  color: #000000;
+  margin-top:10rpx ;
+}
+.name-bar .price{
+  opacity: 0.9;
+  
+  font-size: 34rpx;
+  line-height: 1.4;
+  text-align: right;
+  color: #fa5c01;
+  margin-right: 32rpx;
+}
+.no-orders{
+  margin-top: 350rpx;
+  
+  font-size: 26rpx;
+  font-weight: 600;
+  text-align: center;
+  color: #1f1f1f;
+}

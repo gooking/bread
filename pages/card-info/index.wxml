@@ -1,0 +1,58 @@
+<view class="sync-bar">
+  <view class="sync-box">
+    <view class="again-sync">再次同步</view>
+    <view class="weixin-sync">与微信同步会员信息</view>
+  </view>
+  <image mode='aspectFill' class='go' src='/images/icon-font-solid-1@2x.png'></image>
+  <button open-type="getUserInfo" bindgetuserinfo="getUserInfo"></button>
+</view>
+
+<view class="blank"></view>
+
+<view class="message-bar">
+  <view class="title">昵称</view>
+  <view class="content">
+    {{nick}}
+  </view>
+</view>
+
+<view class="blank"></view>
+
+<view class="message-bar">
+  <view class="title">手机</view>
+  <view class="content">
+    {{mobile}}
+    <button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber"></button>
+  </view>
+</view>
+
+<view class="blank"></view>
+
+<view class="message-bar">
+  <view class="title">性别</view>
+  <view class="content">
+    <picker bindchange="bindSexChange" value="{{sexIndex}}" range="{{sexs}}">
+      {{ sexs[sexIndex] }}
+    </picker>
+  </view>
+</view>
+
+<view class="blank"></view>
+
+<view class="message-bar">
+  <view class="title">生日</view>
+  <view class="content" bindtap="showbirthday"> {{ birthday ? birthday : '保存后不可再次修改' }} </view>
+</view>
+
+<view class="blank"></view>
+
+<van-button type="primary" color="#04c160" custom-class="button" bindtap="modifyUserInfo">保存</van-button>
+
+<van-popup show="{{ showbirthday }}" position="bottom">
+  <van-datetime-picker
+    type="date"
+    min-date="0"
+    bind:cancel="hidebirthday"
+    bind:confirm="birthdayChange"
+  />
+</van-popup>

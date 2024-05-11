@@ -1,0 +1,4 @@
+<van-picker id="gooking" columns="{{ columns }}" bind:change="onChange" active-class="select1" custom-class="select" />
+
+<van-button type="default" custom-class="button1" bind:click="back">取消</van-button>
+<van-button type="primary" custom-class="button2" bind:click="ok">完成</van-button>

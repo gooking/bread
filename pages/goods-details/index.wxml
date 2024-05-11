@@ -1,0 +1,58 @@
+<swiper class='goods-details-photo' autoplay bindchange="bannerChange">
+  <swiper-item wx:for="{{goodsDetail.pics}}" wx:key="id">
+    <image mode='aspectFill' src='{{item.pic}}'></image>
+  </swiper-item>
+</swiper>
+<view class="Borders-box">
+  <view wx:for="{{goodsDetail.pics}}" wx:key="id" class="Borders{{index == curbanner ? '':'1'}}"></view>
+</view>
+<van-popup
+  show="{{ true }}"
+  overlay="{{ false }}"
+  round
+  position="bottom"
+  bind:close="onClose">
+
+  <view class="content">{{goodsDetail.basicInfo.name}}</view>
+  <view class="price">
+    <text>¥</text>{{goodsDetail.basicInfo.minPrice}} / {{goodsDetail.basicInfo.unit}}
+  </view>
+  <view class="details"><parser html="{{goodsDetail.content}}" /></view>
+
+  <view wx:if="{{buyedNumber == 0}}" class="buy-detail">
+    <view class="title">规格</view>
+    <view class="select">
+      <picker bindchange="bindKouweiChange" value="{{kouweiIndex}}" range="{{kouwei}}" range-key="cname">
+      <view class="detail">
+        <view class="detail1">{{kouwei[kouweiIndex].cname}}</view>
+        <image mode='aspectFill' class='select1' src='/images/icon-font-solid@2x.png'></image>
+      </view>
+      </picker>
+
+      <view class="add-cart" bindtap="addCart">
+        <view class="add1">加入购物车</view>
+        <image mode='aspectFill' class='add2' src='/images/icon-2-1-shop-cart-normal@2x.png'></image>
+      </view>
+    </view>
+  </view>
+
+  <view wx:else class="buy-detail">
+    <view class="title-box">
+      <view class="title1">规格</view>
+      <view class="title2">购买数量</view>
+    </view>
+    <view class="select">
+      <picker bindchange="bindKouweiChange" value="{{kouweiIndex}}" range="{{kouwei}}" range-key="cname">
+        <view class="detail-1">
+          <view class="detail1">{{kouwei[kouweiIndex].cname}}</view>
+          <image mode='aspectFill' class='select1' src='/images/icon-font-solid.png'></image>
+        </view>
+      </picker>
+
+      <view class="add-cart1">
+        <van-stepper min="0" value="{{ buyedNumber }}" bind:change="changeNumber" async-change custom-class="stepper" input-class="input" plus-class="plus" minus-class="minus" />
+      </view>
+    </view>
+  </view>
+
+</van-popup>  

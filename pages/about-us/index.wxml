@@ -1,0 +1,15 @@
+<navigator url="/pages/about-us/detail?key=agreement" hover-class="none">
+  <view class="content-box">
+    <view class="content">用户隐私协议</view>
+    <image mode='aspectFill' class='photos' src='/images/icon-font-solid-1@2x.png'></image>
+  </view>
+</navigator>
+<view class="blank"></view>
+<navigator url="/pages/about-us/detail?key=qa" hover-class="none">
+  <view class="content-box">
+    <view class="content">常见问题</view>
+    <image mode='aspectFill' class='photos' src='/images/icon-font-solid-1@2x.png'></image>
+  </view>
+</navigator>
+<view class="blank"></view>
+<view class="version">Version 1.0 17:30:54</view>

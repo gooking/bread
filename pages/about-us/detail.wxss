@@ -1,0 +1,14 @@
+.title {
+  margin-top: 56rpx;
+  margin-left: 40rpx;
+  height: 56rpx;
+  font-size: 40rpx;
+  font-weight: 600;
+  color: #3c3c3c;
+}
+.content {
+  margin: 40rpx;
+  font-size: 34rpx;
+  font-weight: 300;
+  color: #3c3c3c;
+}

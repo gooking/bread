@@ -1,0 +1,87 @@
+.card-box{
+  display: flex;
+  justify-content:space-between;
+  align-items:center;
+  margin:30rpx 40rpx 12rpx 40rpx;
+}
+.card-box .card{
+  width: 32rpx;
+  height: 24rpx;
+  border-radius: 2rpx;
+}
+.card-box .integral{
+  
+  font-size: 24rpx;
+  text-align: right;
+  color: #b3b3b3;
+}
+.pricebar{
+  display: flex;
+  justify-content:center;
+  height: 100rpx;
+  font-size: 84rpx;
+  color: #3d3d3d;
+  margin-right: 474rpx;
+  margin-left: 30rpx;
+}
+.pricebar .price{
+  height: 100rpx;
+  font-size: 84rpx;
+  color: #3d3d3d;
+}
+
+.pricebar .units{
+  font-size: 28rpx;
+  font-weight: bold;
+  margin-top:54rpx ;
+}
+.number-bar{
+  display: flex;
+  flex-direction:column;
+  align-items:center;
+  margin:120rpx 208rpx 0rpx 212rpx ;
+}
+
+.number-bar .title{
+  
+  font-size: 26rpx;
+  font-weight: 600;
+  text-align: center;
+  color: #3d3d3d;
+}
+.number-bar .Bitmap{
+  width: 330rpx;
+  height: 330rpx;
+  margin-top:10rpx;
+}
+
+.number-bar .num{
+  
+  font-size: 26rpx;
+  font-weight: 500;
+  letter-spacing: 2rpx;
+  text-align: center;
+  color: #3d3d3d;
+}
+.button-bar{
+  position: absolute;
+  left: 224rpx;
+  bottom: 56rpx;
+  height: 74rpx;
+  border-radius: 37rpx;
+  box-shadow: 0 12rpx 24rpx 0 rgba(0, 0, 0, 0.06), 0 4rpx 8rpx 0 rgba(0, 0, 0, 0.06);
+  background-color: #ffffff;
+  padding: 12rpx 80rpx;
+}
+.button-bar .button{
+  
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #3c3c3c;
+  line-height: 74rpx;
+}
+.login-btn {  
+  width: 600rpx;
+  margin: auto;
+  margin-top: 264rpx;
+}

@@ -1,0 +1,52 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/my/index",
+    "pages/card/index",
+    "pages/all-stores/index",
+    "pages/orders/index",
+    "pages/select-time/index",
+    "pages/add-note/index",
+    "pages/pay/index",
+    "pages/goods-details/index",
+    "pages/current-order/index",
+    "pages/order-view/index",
+    "pages/order-view/scan-result",
+    "pages/about-us/index",
+    "pages/about-us/detail",
+    "pages/user-record/index",
+    "pages/card-info/index"
+  ],
+  "requiredPrivateInfos": [
+    "getLocation",
+    "chooseAddress",
+    "chooseLocation"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "",
+    "navigationBarTextStyle":"black"
+  },
+  "usingComponents": {
+    "parser":"/components/parser.20200414.min/parser",
+    "van-tabbar": "@vant/weapp/tabbar/index",
+    "van-tabbar-item": "@vant/weapp/tabbar-item/index",
+    "van-button": "@vant/weapp/button/index",
+    "van-icon": "@vant/weapp/icon/index",
+    "van-popup": "@vant/weapp/popup/index",
+    "van-stepper": "@vant/weapp/stepper/index",
+    "van-picker": "@vant/weapp/picker/index",
+    "van-notice-bar": "@vant/weapp/notice-bar/index",
+    "van-skeleton": "@vant/weapp/skeleton/index",
+    "van-search": "@vant/weapp/search/index",
+    "van-dialog": "@vant/weapp/dialog/index",
+    "van-datetime-picker": "@vant/weapp/datetime-picker/index"
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "获取离你最近的门店"
+    }
+  },
+  "sitemapLocation": "sitemap.json"
+}

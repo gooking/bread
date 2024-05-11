@@ -1,0 +1,44 @@
+<view wx:if="{{tabIndex == 0}}" class="orders-bar">
+  <view class="current-orders" data-index="0" bindtap="changeTab">当前订单</view>
+  <view class="previous-orders" data-index="1" bindtap="changeTab">历史订单</view>
+</view>
+<view wx:else class="orders-bar">
+  <view class="current-orders1" data-index="0" bindtap="changeTab">当前订单</view>
+  <view class="previous-orders1" data-index="1" bindtap="changeTab">历史订单</view>
+</view>
+
+<view wx:if="{{!orderList}}" class="no-orders">暂无订单记录</view>
+
+<view wx:for="{{orderList}}" wx:key="id" class="order-details-bar">
+  <navigator url="/pages/order-view/index?id={{item.id}}" hover-class="none">
+    <view class="shops-tatle-box">
+      <view class="shop-tatle">{{item.shopNameZt}}</view>
+      <view class="unpaid-bar">
+        <view class="unpaid ">{{item.statusStr}}</view>
+        <image mode='aspectFill' class='go' src='/images/icon-font-solid-2@2x.png'></image>
+      </view>
+    </view>
+  </navigator>
+
+  <view class="order-number">订单编号：{{item.orderNumber}}</view>
+  <view class="order-time">下单时间：{{item.dateAdd}}</view>
+  <view class="goods-photo">
+    <image wx:for="{{goodsMap[item.id]}}" wx:key="id" wx:for-item="goods" mode='aspectFill' class='goods' src='{{goods.pic}}'></image>
+  </view>
+  <view class="blank"></view>
+  <view class="botton-bar">
+    <view class="price">
+    <text>¥</text>{{item.amountReal}}
+    </view>
+    <view class="botton-box">
+      <view wx:if="{{item.status == 0}}" class="botton" data-id="{{item.id}}" bindtap="cancelOrderTap">取消订单</view>
+      <view wx:if="{{item.status == 3 || item.status == 4}}" class="botton" data-id="{{item.id}}" bindtap="deleteorder">删除订单</view>
+      <view class="botton" data-id="{{item.shopIdZt}}" bindtap="callShop">联系门店</view>
+      <view wx:if="{{item.status == 0}}" class="botton1" bindtap="toPayTap" data-id="{{item.id}}" data-money="{{item.amountReal}}" data-score="{{item.score}}">再次支付</view>
+    </view>
+  </view>
+</view>
+<view class="bottom"></view>
+<!-- 底部导航栏 -->
+<import src="/template/tabbar/index.wxml" />
+<template is="tabbar" data="{{ tabbarActive: 2 }}" />

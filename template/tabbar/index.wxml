@@ -1,0 +1,67 @@
+<template name="tabbar">
+  <van-tabbar active="{{ tabbarActive }}" inactive-color="#c6c6c6" active-color="#000" bind:change="tabbarChange">
+    <van-tabbar-item >
+      <image
+        slot="icon"
+        src="/images/icon-1-home-normal@2x.png"
+        mode="aspectFit"
+        style="width: 32rpx; height: 32rpx;" 
+      />
+      <image
+        slot="icon-active"
+        src="/images/icon-1-home-active@2x.png"
+        mode="aspectFit"
+        style="width: 32rpx; height: 32rpx;"
+      />
+      <text class="tabbar-text">首页</text>
+    </van-tabbar-item>
+
+    <van-tabbar-item >
+      <image
+        slot="icon"
+        src="/images/icon-2-menu-normal@2x.png"
+        mode="aspectFit"
+        style="width: 32rpx; height: 32rpx;"
+      />
+      <image
+        slot="icon-active"
+        src="/images/icon-2-menu-active@2x.png"
+        mode="aspectFit"
+        style="width: 32rpx; height: 32rpx;"
+      />
+      <text class="tabbar-text">点单</text>
+    </van-tabbar-item>
+
+    <van-tabbar-item >
+      <image
+        slot="icon"
+        src="/images/icon-3-order-normal@2x.png"
+        mode="aspectFit"
+        style="width: 32rpx; height: 32rpx;"
+      />
+      <image
+        slot="icon-active"
+        src="/images/icon-3-order-active@2x.png"
+        mode="aspectFit"
+        style="width: 32rpx; height: 32rpx;"
+      />
+      <text class="tabbar-text">订单</text>
+    </van-tabbar-item>
+
+    <van-tabbar-item >
+      <image
+        slot="icon"
+        src="/images/icon-4-card-normal@2x.png"
+        mode="aspectFit"
+        style="width: 32rpx; height: 32rpx;"
+      />
+      <image
+        slot="icon-active"
+        src="/images/icon-4-card-active@2x.png"
+        mode="aspectFit"
+        style="width: 32rpx; height: 32rpx;"
+      />
+      <text class="tabbar-text">我的</text>
+    </van-tabbar-item>
+  </van-tabbar>
+</template>

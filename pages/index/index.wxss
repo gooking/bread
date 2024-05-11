@@ -1,0 +1,145 @@
+.inc-bar{
+  display: flex;
+  justify-content:space-between;
+  padding: 30rpx 30rpx 30rpx 36rpx;
+}
+.inc-bar .inc-box{
+  display: flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.inc-bar .inc-box .myinc{
+  width: 32rpx;
+  height: 24rpx;
+  border-radius: 4rpx;
+
+
+}
+.inc-bar .inc-box .p{
+  width: 88rpx;
+  height: 36rpx;
+  font-size: 26rpx;
+  color: #171717;
+  margin-left: 12rpx;
+}
+.inc-bar .slide{
+  width: 168rpx;
+  height: 34rpx;
+  
+  font-size: 24rpx;
+  text-align: right;
+  color: #b3b3b3;
+}
+
+.focus{
+  width: 720rpx;
+  height: 480rpx;
+  margin-left: 30rpx;
+}
+.focus image {
+  width: 100%;
+  height: 100%;
+  border-radius: 8rpx;
+}
+
+.Borders-box{
+  display: flex;
+  justify-content:center;
+  padding: 10rpx 626rpx 42rpx 28rpx;
+}
+
+.Borders-box .Borders{
+  width: 16rpx;
+  height: 8rpx;
+  border-radius: 4rpx;
+  border: solid 2rpx #3c3c3c;
+  background-color: #3c3c3c;
+  margin-left: 8rpx;
+}
+.Borders-box .Borders1{
+  width: 16rpx;
+  height: 8rpx;
+  border-radius: 4rpx;
+  border: solid 2rpx #3c3c3c;
+  background-color: #ffffff;
+  margin-left: 8rpx;
+
+}
+.shop{
+  display: flex;
+  justify-content:space-between;
+  align-items: flex-end;
+
+}
+.shop .Nearby-stores{
+  font-size: 32rpx;
+  color: #3c3c3c;
+  margin:0rpx 460rpx 20rpx 36rpx ;
+}
+.shop .all-stores{
+  
+  font-size: 24rpx;
+  text-align: right;
+  color: #b3b3b3;
+  margin-right: 30rpx;
+  margin-bottom: 20rpx;
+}
+
+.shop-list{
+  display: flex;
+  justify-content:center;
+  margin-right: 30rpx;
+  margin-left:36rpx ;
+  margin-bottom: 24rpx;
+}
+
+.shop-list .shop-logo1{
+  width: 400rpx;
+  height: 320rpx;
+  object-fit: contain;
+}
+
+.shop-list .shop-logo2{
+  display: flex;
+  flex-direction:column;
+  width: 266rpx;
+  height: 320rpx;
+  border-radius: 12rpx;
+  background-color: #f2f3f5;
+  margin-left:18rpx;
+}
+
+.shop-list .shop-logo2 .shop-logo{
+  width: 72rpx;
+  height: 88rpx;
+  margin:48rpx 160rpx 30rpx 34rpx;
+}
+.shop-list .shop-logo2 .shop-name{
+  width: 200rpx;
+  height: 88rpx;
+  font-size: 32rpx;
+  color: #3c3c3c;
+  margin:0rpx 32rpx 0rpx 34rpx;
+}
+
+.shop-list .shop-logo2 .distance-bar{
+  display: flex;
+  justify-content:space-between;
+  margin:10rpx 32rpx 20rpx 34rpx;
+}
+
+.shop-list .shop-logo2 .distance-bar .distance{
+  width: 84rpx;
+  height: 36rpx;
+  
+  font-size: 26rpx;
+  font-weight: 500;
+  color: #b3b3b3;
+}
+.shop-list .shop-logo2 .distance-bar .arrow{
+  width: 32rpx;
+  height: 32rpx;
+  object-fit: contain;
+  margin-left: 84rpx;
+}

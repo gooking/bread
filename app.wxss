@@ -1,0 +1,7 @@
+.tabbar-text{
+  font-size: 20rpx;
+  margin-top: 10rpx;
+}
+page, view {
+  font-family: LxgwWenKai, 'PingFang SC', 'Microsoft Yahei';
+}

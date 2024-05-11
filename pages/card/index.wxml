@@ -1,0 +1,21 @@
+<view class="card-box">
+  <image mode='aspectFill' class='card' src='/images/icon-4-card-active@2x.png'></image>
+  <view class="integral">我的积分</view>
+</view>
+<view class="pricebar">
+  <view class="price">{{userAmount.score}}</view>
+  <view class="units">p</view>
+</view>
+
+<view wx:if="{{userInfo && userInfo.avatarUrl}}" class="number-bar">
+  <view class="title">会员卡号码</view>
+  <canvas class="Bitmap" canvas-id="qrcode" />
+  <view class="num">{{cardNumber}}</view>
+</view>
+<view wx:else class="login-btn">
+  <van-button type="primary" block round bind:click="updateUserInfo">微信登陆后查看会员卡</van-button>
+</view>
+<view class="button-bar">
+  <view class="button" bindtap="goback">返回首页</view>
+</view>
+

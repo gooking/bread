@@ -1,0 +1,102 @@
+<view class="order-status-bar">
+  <view class="order-status">
+    <view class="title">订单状态</view>
+    <view class="order-number">订单编号：{{ orderDetail.orderInfo.orderNumber }}</view>
+    <view class="order-time">下单时间：{{ orderDetail.orderInfo.dateAdd }}</view>
+  </view>
+  <view class="paid">{{ orderDetail.orderInfo.statusStr }}</view>
+</view>
+
+<view class="blank"></view>
+
+<view class="shops-bar">
+  <view class="shops-box">
+    <view class="content">
+      <view class="titles">{{ orderDetail.orderInfo.shopNameZt }}</view>
+      <!-- <van-icon name="arrow"/> -->
+    </view>
+    <view class="text">请确认门店正确</view>
+  </view>
+  <view class="get">自取</view>
+</view>
+<view class="shops-bar">
+  <view class="shops-box">
+    <view class="content">
+      <view class="titles">联络电话</view>
+    </view>
+    <view class="text">{{ orderDetail.extJson['联络电话'] }}</view>
+  </view>
+</view>
+<view class="shops-bar">
+  <view class="shops-box">
+    <view class="content">
+      <view class="titles">自取时间</view>
+    </view>
+    <view class="text">{{ orderDetail.extJson['自取时间'] }}</view>
+  </view>
+</view>
+<view class="blank1"></view>
+<view wx:for="{{orderDetail.goods}}" wx:key="id" class="orderdetails-bar">
+  <image mode='aspectFill' class='photos' src='{{ item.pic }}'></image>
+  <view class="titles-bar">
+    <view class="titles-box1">
+      <view class="titles">{{ item.goodsName }}</view>
+      <view class="price">
+      <text>¥</text>{{ item.amount }}
+      </view>
+    </view>
+    <view class="titles-box2">
+      <view class="titles">{{ item.property }}</view>
+      <view class="num">×{{ item.number }}</view>
+    </view>
+  </view>
+</view>
+
+<view class="blank2"></view>
+
+<view class="shops-bar1">
+  <view class="shops-box">
+    <view class="content">
+      <view class="titles">备注信息</view>
+    </view>
+    <view class="text">{{orderDetail.orderInfo.remark}}</view>
+  </view>
+</view>
+<view class="num-bar">
+  <view class="num">共 {{orderDetail.orderInfo.goodsNumber}} 件商品，小计</view>
+  <view class="price">
+    <text>¥</text>{{orderDetail.orderInfo.amountReal}}
+  </view>
+</view>
+<view class="blank1"></view>
+
+<view class="shops-bar">
+  <view class="shops-box">
+    <view class="content">
+      <view class="titles">支付方式</view>
+    </view>
+    <view class="text">微信支付</view>
+  </view>
+</view>
+<view class="blank1"></view>
+
+<block wx:if="{{orderDetail.orderInfo.hxNumber && orderDetail.orderInfo.status > 0 && orderDetail.orderInfo.status < 3}}">
+  <view class="shops-bar">
+    <view class="shops-box">
+      <view class="content">
+        <view class="titles">核销码</view>
+      </view>
+      <view class="text"><canvas class="hx-canvas" canvas-id="qrcode" /></view>
+    </view>
+  </view>
+  <view class="blank1"></view>
+</block>
+<!-- <view class="pay-bar">
+  <view class="pay-box">
+    <view class="title">总价</view>
+    <view class="price">
+      <text>¥</text>211.00
+    </view>
+  </view>
+  <view class="pay-byn">结算</view>
+</view> -->

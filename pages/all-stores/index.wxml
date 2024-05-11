@@ -1,0 +1,22 @@
+<map id="myMap" style="width: 100%; height: 440rpx;" show-location bindregionchange="mapchange"></map>
+<view class="search-box">
+  <van-search placeholder="请输入搜索关键词" custom-class="search" bind:change="searchChange" bind:search="search" bind:clear="clearsearch"/>
+</view>
+<view wx:for="{{shops}}" wx:key="id" class="stores-bar"  bindtap="goShop" data-idx="{{ index }}">
+  <view class="title-box">
+    <view class="title">{{ item.name }}</view>
+    <view class="distance">
+      <view class="distance1">{{ item.distance }}公里</view>
+      <image mode='aspectFill' class='go' src='/images/icon-font-solid-2@2x.png'></image>
+    </view>
+  </view>
+
+  <view class="address">{{ item.address }}</view>
+
+  <view class="time-box">
+    <view class="time">{{ item.openingHours }}</view>
+    <view wx:if="{{item.isOpening}}" class="open">营业中</view>
+    <view wx:else class="open close">休息中</view>
+  </view>
+
+</view>

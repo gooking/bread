@@ -1,0 +1,95 @@
+<van-notice-bar
+  wx:if="{{purchaseNotes}}"
+  custom-class="notice-bar"
+  background-color="#f5f5f5"
+  text="{{purchaseNotes}}"
+/>
+<view class="shops-bar">
+  <view class="shops-box">
+    <view class="content">
+      <view class="titles">{{ shopInfo.name }}</view>
+      <!-- <van-icon name="arrow"/> -->
+    </view>
+    <view class="text">距你 {{ shopInfo.distance *1000}} 米，请确认门店正确</view>
+  </view>
+  <view class="get">自取</view>
+</view>
+<view class="shops-bar">
+  <view class="shops-box">
+    <view class="content">
+      <view class="titles">联络电话</view>
+    </view>
+    <view class="text">{{mobile}}</view>
+  </view>
+  <view class="get1-box">
+    <view class="get1">自动填写</view>
+    <button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber"></button>
+  </view>
+</view>
+<navigator url="/pages/select-time/index" hover-class="none">
+  <view class="shops-bar">
+    <view class="shops-box">
+      <view class="content">
+        <view class="titles">自取时间</view>
+      </view>
+      <view class="text">{{fetchTime}}</view>
+    </view>
+    <van-icon name="arrow"/>
+  </view>
+</navigator>
+<view class="blank1"></view>
+<view wx:for="{{shippingCarInfo.items}}" wx:key="key" class="orderdetails-bar">
+  <image mode='aspectFill' class='photos' src='{{item.pic}}'></image>
+  <view class="titles-bar">
+    <view class="titles-box1">
+      <view class="titles">{{item.name}}</view>
+      <view class="price">
+      <text>¥</text>{{item.price}}
+      </view>
+    </view>
+    <view class="titles-box2">
+      <view class="titles"> </view>
+      <view class="num">×{{ item.number }}</view>
+    </view>
+  </view>
+</view>
+
+<view class="blank2"></view>
+
+<navigator url="/pages/add-note/index" hover-class="none">
+  <view class="shops-bar1">
+    <view class="shops-box">
+      <view class="content">
+        <view class="titles">备注信息</view>
+      </view>
+      <view class="text">{{remark}}</view>
+    </view>
+    <van-icon name="arrow"/>
+  </view>
+</navigator>
+<view class="num-bar">
+  <view class="num">共 {{shippingCarInfo.number}} 件商品，小计</view>
+  <view class="price">
+    <text>¥</text>{{shippingCarInfo.price}}
+  </view>
+</view>
+<view class="blank1"></view>
+
+<!-- <view class="shops-bar">
+  <view class="shops-box">
+    <view class="content">
+      <view class="titles">支付方式</view>
+    </view>
+    <view class="text">微信支付</view>
+  </view>
+</view> -->
+<view class="blank1 blank-bottom"></view>
+<view class="pay-bar">
+  <view class="pay-box">
+    <view class="title">总价</view>
+    <view class="price">
+      <text>¥</text>{{shippingCarInfo.price}}
+    </view>
+  </view>
+  <view class="pay-byn" bindtap="createorder">结算</view>
+</view>

@@ -1,0 +1,90 @@
+.sync-bar{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+.sync-bar button {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  z-index: 99;
+  left: 0;
+  top: 0;
+}
+.sync-bar .sync-box{
+  margin-bottom: 32rpx;
+  margin-top: 32rpx;
+  margin-left:32rpx ;
+}
+.sync-bar .sync-box .again-sync{
+  opacity: 0.9;
+  
+  font-size: 34rpx;
+  color: #000000;
+}
+.sync-bar .sync-box .weixin-sync{
+  opacity: 0.5;
+  
+  font-size: 28rpx;
+  text-align: justify;
+  color: #000000;
+  margin-top:8rpx ;
+}
+.sync-bar .go{
+  width: 24rpx;
+  height: 48rpx;
+  margin-right: 38rpx;
+}
+.blank{
+  width: 100vw;
+  height: 0.5px;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.message-bar{
+  display: flex;
+  align-items: center;
+  margin-top: 32rpx;
+  margin-bottom: 32rpx;
+  margin-left:30rpx ;
+}
+.message-bar .title{
+  width: 136rpx;
+  opacity: 0.9;
+  
+  font-size: 34rpx;
+  color: rgba(0, 0, 0, 0.9);
+}
+.message-bar .content{
+  
+  font-size: 34rpx;
+  color: #000000;
+  margin-left:44rpx ;
+  position: relative;
+  width: 100%;
+}
+.message-bar .content button {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  z-index: 99;
+  left: 0;
+  top: 0;
+}
+
+.button{
+  width: 240rpx;
+  height: 80rpx;
+  border-radius: 8rpx;
+  margin-top:40rpx ;
+  margin-left: 254rpx;
+  
+  font-size: 34rpx;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 2rpx;
+  text-align: center;
+  color: #ffffff;
+}
