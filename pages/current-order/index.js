@@ -34,6 +34,7 @@ Page({
     wx.showLoading({
       title: '...',
     })
+    // https://www.yuque.com/apifm/nu0f75/uwggsm
     const res = await WXAPI.orderList({
       token: wx.getStorageSync('token'),
       statusBatch
@@ -77,6 +78,7 @@ Page({
       content: '',
       success: function(res) {
         if (res.confirm) {
+          // https://www.yuque.com/apifm/nu0f75/wh4rrs
           WXAPI.orderClose(wx.getStorageSync('token'), orderId).then(function(res) {
             if (res.code == 0) {
               that.orderList();
@@ -94,6 +96,7 @@ Page({
       content: '',
       success: function(res) {
         if (res.confirm) {
+          // https://www.yuque.com/apifm/nu0f75/eex4bb
           WXAPI.orderDelete(wx.getStorageSync('token'), orderId).then(function(res) {
             if (res.code == 0) {
               that.orderList();
@@ -105,6 +108,7 @@ Page({
   },
   async callShop(e) {
     const id = e.currentTarget.dataset.id
+    // https://www.yuque.com/apifm/nu0f75/cu4cfi
     const res = await WXAPI.shopSubdetail(id)
     if (res.code != 0) {
       wx.showToast({
@@ -135,6 +139,7 @@ Page({
     const orderId = e.currentTarget.dataset.id;
     let money = e.currentTarget.dataset.money;
     const needScore = e.currentTarget.dataset.score;
+    // https://www.yuque.com/apifm/nu0f75/wrqkcb
     WXAPI.userAmount(wx.getStorageSync('token')).then(function(res) {
       if (res.code == 0) {
         // 增加提示框
@@ -182,8 +187,11 @@ Page({
   _toPayTap: function (orderId, money){
     const _this = this
     if (money <= 0) {
-      // 直接使用余额支付
-      WXAPI.orderPay(wx.getStorageSync('token'), orderId).then(function (res) {
+      // 直接使用余额支付 https://www.yuque.com/apifm/nu0f75/lwt2vi
+      WXAPI.orderPayV2({
+        token: wx.getStorageSync('token'),
+        orderId
+      }).then(function (res) {
         _this.onShow();
       })
     } else {

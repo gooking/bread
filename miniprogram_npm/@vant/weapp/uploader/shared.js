@@ -1,32 +1,64 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-// props for choose image
-exports.chooseImageProps = {
+exports.messageFileProps = exports.mediaProps = exports.videoProps = exports.imageProps = void 0;
+// props for image
+exports.imageProps = {
     sizeType: {
         type: Array,
-        value: ['original', 'compressed']
+        value: ['original', 'compressed'],
     },
     capture: {
         type: Array,
-        value: ['album', 'camera']
-    }
+        value: ['album', 'camera'],
+    },
+    showmenu: {
+        type: Boolean,
+        value: true,
+    },
 };
-// props for choose video
-exports.chooseVideoProps = {
+// props for video
+exports.videoProps = {
     capture: {
         type: Array,
-        value: ['album', 'camera']
+        value: ['album', 'camera'],
     },
     compressed: {
         type: Boolean,
-        value: true
+        value: true,
     },
     maxDuration: {
         type: Number,
-        value: 60
+        value: 60,
     },
     camera: {
         type: String,
-        value: 'back'
-    }
+        value: 'back',
+    },
+    referrerPolicy: {
+        type: String,
+        value: 'no-referrer',
+    },
+};
+// props for media
+exports.mediaProps = {
+    capture: {
+        type: Array,
+        value: ['album', 'camera'],
+    },
+    mediaType: {
+        type: Array,
+        value: ['image', 'video', 'mix'],
+    },
+    maxDuration: {
+        type: Number,
+        value: 60,
+    },
+    camera: {
+        type: String,
+        value: 'back',
+    },
+};
+// props for file
+exports.messageFileProps = {
+    extension: null,
 };

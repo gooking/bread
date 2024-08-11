@@ -2,13 +2,13 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var link_1 = require("../mixins/link");
 var component_1 = require("../common/component");
-component_1.VantComponent({
+(0, component_1.VantComponent)({
     classes: [
         'title-class',
         'label-class',
         'value-class',
         'right-icon-class',
-        'hover-class'
+        'hover-class',
     ],
     mixins: [link_1.link],
     props: {
@@ -27,13 +27,14 @@ component_1.VantComponent({
         useLabelSlot: Boolean,
         border: {
             type: Boolean,
-            value: true
-        }
+            value: true,
+        },
+        titleStyle: String,
     },
     methods: {
         onClick: function (event) {
             this.$emit('click', event.detail);
             this.jumpLink();
-        }
-    }
+        },
+    },
 });

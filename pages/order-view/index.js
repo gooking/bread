@@ -22,6 +22,7 @@ Page({
 
   },
   async orderDetail() {
+    // https://www.yuque.com/apifm/nu0f75/oamel8
     const res = await WXAPI.orderDetail(wx.getStorageSync('token'), this.data.orderId)
     if (res.code == 0) {
       if (res.data.orderInfo.status == 1) {
@@ -41,6 +42,7 @@ Page({
     }
   },
   async shopSubdetail(shopId) {
+    // https://www.yuque.com/apifm/nu0f75/cu4cfi
     const res = await WXAPI.shopSubdetail(shopId)
     if (res.code == 0) {
       this.setData({

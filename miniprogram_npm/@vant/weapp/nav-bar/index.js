@@ -1,43 +1,44 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var component_1 = require("../common/component");
-component_1.VantComponent({
+var utils_1 = require("../common/utils");
+(0, component_1.VantComponent)({
     classes: ['title-class'],
     props: {
         title: String,
         fixed: {
             type: Boolean,
-            observer: 'setHeight'
+            observer: 'setHeight',
         },
         placeholder: {
             type: Boolean,
-            observer: 'setHeight'
+            observer: 'setHeight',
         },
         leftText: String,
         rightText: String,
+        customStyle: String,
         leftArrow: Boolean,
         border: {
             type: Boolean,
-            value: true
+            value: true,
         },
         zIndex: {
             type: Number,
-            value: 1
+            value: 1,
         },
         safeAreaInsetTop: {
             type: Boolean,
-            value: true
-        }
+            value: true,
+        },
     },
     data: {
-        statusBarHeight: 0,
-        height: 44
+        height: 46,
     },
     created: function () {
-        var statusBarHeight = wx.getSystemInfoSync().statusBarHeight;
+        var statusBarHeight = (0, utils_1.getSystemInfoSync)().statusBarHeight;
         this.setData({
             statusBarHeight: statusBarHeight,
-            height: 44 + statusBarHeight
+            height: 46 + statusBarHeight,
         });
     },
     mounted: function () {
@@ -56,10 +57,12 @@ component_1.VantComponent({
                 return;
             }
             wx.nextTick(function () {
-                _this.getRect('.van-nav-bar').then(function (res) {
-                    _this.setData({ height: res.height });
+                (0, utils_1.getRect)(_this, '.van-nav-bar').then(function (res) {
+                    if (res && 'height' in res) {
+                        _this.setData({ height: res.height });
+                    }
                 });
             });
-        }
-    }
+        },
+    },
 });

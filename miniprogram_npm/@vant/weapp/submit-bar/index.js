@@ -1,22 +1,18 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var component_1 = require("../common/component");
-component_1.VantComponent({
-    classes: [
-        'bar-class',
-        'price-class',
-        'button-class'
-    ],
+(0, component_1.VantComponent)({
+    classes: ['bar-class', 'price-class', 'button-class'],
     props: {
         tip: {
             type: null,
-            observer: 'updateTip'
+            observer: 'updateTip',
         },
         tipIcon: String,
         type: Number,
         price: {
             type: null,
-            observer: 'updatePrice'
+            observer: 'updatePrice',
         },
         label: String,
         loading: Boolean,
@@ -24,31 +20,32 @@ component_1.VantComponent({
         buttonText: String,
         currency: {
             type: String,
-            value: '¥'
+            value: '¥',
         },
         buttonType: {
             type: String,
-            value: 'danger'
+            value: 'danger',
         },
         decimalLength: {
             type: Number,
             value: 2,
-            observer: 'updatePrice'
+            observer: 'updatePrice',
         },
         suffixLabel: String,
         safeAreaInsetBottom: {
             type: Boolean,
-            value: true
-        }
+            value: true,
+        },
     },
     methods: {
         updatePrice: function () {
             var _a = this.data, price = _a.price, decimalLength = _a.decimalLength;
-            var priceStrArr = typeof price === 'number' && (price / 100).toFixed(decimalLength).split('.');
+            var priceStrArr = typeof price === 'number' &&
+                (price / 100).toFixed(decimalLength).split('.');
             this.setData({
                 hasPrice: typeof price === 'number',
                 integerStr: priceStrArr && priceStrArr[0],
-                decimalStr: decimalLength && priceStrArr ? "." + priceStrArr[1] : ''
+                decimalStr: decimalLength && priceStrArr ? ".".concat(priceStrArr[1]) : '',
             });
         },
         updateTip: function () {
@@ -56,6 +53,6 @@ component_1.VantComponent({
         },
         onSubmit: function (event) {
             this.$emit('submit', event.detail);
-        }
-    }
+        },
+    },
 });

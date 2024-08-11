@@ -6,6 +6,7 @@ function showTabBarBadge(){
   if (!token) {
     return
   }
+  // https://www.yuque.com/apifm/nu0f75/awql14
   WXAPI.shippingCarInfo(token).then(res => {
     if (res.code == 700) {
       wx.removeTabBarBadge({

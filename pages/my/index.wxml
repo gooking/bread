@@ -1,8 +1,7 @@
 <view class="mycard"></view>
 <view wx:if="{{userInfo && userInfo.avatarUrl}}" class="card-bar">
   <view class="card-box">
-    <image mode='aspectFill' class='my-photo' src='{{userInfo.avatarUrl}}'></image>
-    <view class="name">{{userInfo.nick}}</view>
+    <view class="name">会员编号: {{userInfo.id}}</view>
   </view>
 
   <navigator url="/pages/card/index" hover-class="none">

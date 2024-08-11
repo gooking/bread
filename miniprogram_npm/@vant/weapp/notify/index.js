@@ -2,37 +2,41 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var component_1 = require("../common/component");
 var color_1 = require("../common/color");
-component_1.VantComponent({
+var utils_1 = require("../common/utils");
+(0, component_1.VantComponent)({
     props: {
         message: String,
         background: String,
         type: {
             type: String,
-            value: 'danger'
+            value: 'danger',
         },
         color: {
             type: String,
-            value: color_1.WHITE
+            value: color_1.WHITE,
         },
         duration: {
             type: Number,
-            value: 3000
+            value: 3000,
         },
         zIndex: {
             type: Number,
-            value: 110
+            value: 110,
         },
         safeAreaInsetTop: {
             type: Boolean,
-            value: false
+            value: false,
         },
-        top: null
+        top: null,
     },
     data: {
         show: false,
+        onOpened: null,
+        onClose: null,
+        onClick: null,
     },
     created: function () {
-        var statusBarHeight = wx.getSystemInfoSync().statusBarHeight;
+        var statusBarHeight = (0, utils_1.getSystemInfoSync)().statusBarHeight;
         this.setData({ statusBarHeight: statusBarHeight });
     },
     methods: {
@@ -59,6 +63,6 @@ component_1.VantComponent({
             if (onClick) {
                 onClick(event.detail);
             }
-        }
-    }
+        },
+    },
 });

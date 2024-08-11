@@ -12,7 +12,7 @@ var __assign = (this && this.__assign) || function () {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var component_1 = require("../common/component");
-var utils_1 = require("../common/utils");
+var validator_1 = require("../common/validator");
 var LONG_PRESS_START_TIME = 600;
 var LONG_PRESS_INTERVAL = 200;
 // add num and avoid float number
@@ -23,70 +23,76 @@ function add(num1, num2) {
 function equal(value1, value2) {
     return String(value1) === String(value2);
 }
-component_1.VantComponent({
+(0, component_1.VantComponent)({
     field: true,
     classes: ['input-class', 'plus-class', 'minus-class'],
     props: {
         value: {
             type: null,
-            observer: function (value) {
-                if (!equal(value, this.data.currentValue)) {
-                    this.setData({ currentValue: this.format(value) });
-                }
-            }
         },
         integer: {
             type: Boolean,
-            observer: 'check'
+            observer: 'check',
         },
         disabled: Boolean,
-        inputWidth: null,
-        buttonSize: null,
+        inputWidth: String,
+        buttonSize: String,
         asyncChange: Boolean,
         disableInput: Boolean,
         decimalLength: {
             type: Number,
             value: null,
-            observer: 'check'
+            observer: 'check',
         },
         min: {
             type: null,
             value: 1,
-            observer: 'check'
+            observer: 'check',
         },
         max: {
             type: null,
             value: Number.MAX_SAFE_INTEGER,
-            observer: 'check'
+            observer: 'check',
         },
         step: {
             type: null,
-            value: 1
+            value: 1,
         },
         showPlus: {
             type: Boolean,
-            value: true
+            value: true,
         },
         showMinus: {
             type: Boolean,
-            value: true
+            value: true,
         },
         disablePlus: Boolean,
         disableMinus: Boolean,
         longPress: {
             type: Boolean,
-            value: true
-        }
+            value: true,
+        },
+        theme: String,
+        alwaysEmbed: Boolean,
     },
     data: {
-        currentValue: ''
+        currentValue: '',
+    },
+    watch: {
+        value: function () {
+            this.observeValue();
+        },
     },
     created: function () {
         this.setData({
-            currentValue: this.format(this.data.value)
+            currentValue: this.format(this.data.value),
         });
     },
     methods: {
+        observeValue: function () {
+            var value = this.data.value;
+            this.setData({ currentValue: this.format(value) });
+        },
         check: function () {
             var val = this.format(this.data.currentValue);
             if (!equal(val, this.data.currentValue)) {
@@ -94,20 +100,18 @@ component_1.VantComponent({
             }
         },
         isDisabled: function (type) {
+            var _a = this.data, disabled = _a.disabled, disablePlus = _a.disablePlus, disableMinus = _a.disableMinus, currentValue = _a.currentValue, max = _a.max, min = _a.min;
             if (type === 'plus') {
-                return (this.data.disabled ||
-                    this.data.disablePlus ||
-                    this.data.currentValue >= this.data.max);
+                return disabled || disablePlus || +currentValue >= +max;
             }
-            return (this.data.disabled ||
-                this.data.disableMinus ||
-                this.data.currentValue <= this.data.min);
+            return disabled || disableMinus || +currentValue <= +min;
         },
         onFocus: function (event) {
             this.$emit('focus', event.detail);
         },
         onBlur: function (event) {
             var value = this.format(event.detail.value);
+            this.setData({ currentValue: value });
             this.emitChange(value);
             this.$emit('blur', __assign(__assign({}, event.detail), { value: value }));
         },
@@ -126,7 +130,7 @@ component_1.VantComponent({
             value = value === '' ? 0 : +value;
             value = Math.max(Math.min(this.data.max, value), this.data.min);
             // format decimal
-            if (utils_1.isDef(this.data.decimalLength)) {
+            if ((0, validator_1.isDef)(this.data.decimalLength)) {
                 value = value.toFixed(this.data.decimalLength);
             }
             return value;
@@ -137,12 +141,7 @@ component_1.VantComponent({
             if (value === '') {
                 return;
             }
-            var formatted = this.filter(value);
-            // limit max decimal length
-            if (utils_1.isDef(this.data.decimalLength) && formatted.indexOf('.') !== -1) {
-                var pair = formatted.split('.');
-                formatted = pair[0] + "." + pair[1].slice(0, this.data.decimalLength);
-            }
+            var formatted = this.format(value);
             this.emitChange(formatted);
         },
         emitChange: function (value) {
@@ -194,6 +193,6 @@ component_1.VantComponent({
                 return;
             }
             clearTimeout(this.longPressTimer);
-        }
-    }
+        },
+    },
 });

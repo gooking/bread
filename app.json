@@ -30,6 +30,7 @@
   },
   "usingComponents": {
     "parser":"/components/parser.20200414.min/parser",
+    "bind-mobile": "/components/bind-mobile/index",
     "van-tabbar": "@vant/weapp/tabbar/index",
     "van-tabbar-item": "@vant/weapp/tabbar-item/index",
     "van-button": "@vant/weapp/button/index",

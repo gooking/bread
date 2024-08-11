@@ -5,7 +5,7 @@ var touch_1 = require("../mixins/touch");
 var utils_1 = require("../common/utils");
 var THRESHOLD = 0.3;
 var ARRAY = [];
-component_1.VantComponent({
+(0, component_1.VantComponent)({
     props: {
         disabled: Boolean,
         leftWidth: {
@@ -16,7 +16,7 @@ component_1.VantComponent({
                 if (this.offset > 0) {
                     this.swipeMove(leftWidth);
                 }
-            }
+            },
         },
         rightWidth: {
             type: Number,
@@ -26,17 +26,18 @@ component_1.VantComponent({
                 if (this.offset < 0) {
                     this.swipeMove(-rightWidth);
                 }
-            }
+            },
         },
         asyncClose: Boolean,
         name: {
-            type: [Number, String],
-            value: ''
-        }
+            type: null,
+            value: '',
+        },
     },
     mixins: [touch_1.touch],
     data: {
-        catchMove: false
+        catchMove: false,
+        wrapperStyle: '',
     },
     created: function () {
         this.offset = 0;
@@ -53,7 +54,7 @@ component_1.VantComponent({
             this.swipeMove(offset);
             this.$emit('open', {
                 position: position,
-                name: this.data.name
+                name: this.data.name,
             });
         },
         close: function () {
@@ -61,13 +62,13 @@ component_1.VantComponent({
         },
         swipeMove: function (offset) {
             if (offset === void 0) { offset = 0; }
-            this.offset = utils_1.range(offset, -this.data.rightWidth, this.data.leftWidth);
-            var transform = "translate3d(" + this.offset + "px, 0, 0)";
+            this.offset = (0, utils_1.range)(offset, -this.data.rightWidth, this.data.leftWidth);
+            var transform = "translate3d(".concat(this.offset, "px, 0, 0)");
             var transition = this.dragging
                 ? 'none'
                 : 'transform .6s cubic-bezier(0.18, 0.89, 0.32, 1)';
             this.setData({
-                wrapperStyle: "\n        -webkit-transform: " + transform + ";\n        -webkit-transition: " + transition + ";\n        transform: " + transform + ";\n        transition: " + transition + ";\n      "
+                wrapperStyle: "\n        -webkit-transform: ".concat(transform, ";\n        -webkit-transition: ").concat(transition, ";\n        transform: ").concat(transform, ";\n        transition: ").concat(transition, ";\n      "),
             });
         },
         swipeLeaveTransition: function () {
@@ -102,7 +103,7 @@ component_1.VantComponent({
                 return;
             }
             this.dragging = true;
-            ARRAY.filter(function (item) { return item !== _this; }).forEach(function (item) { return item.close(); });
+            ARRAY.filter(function (item) { return item !== _this && item.offset !== 0; }).forEach(function (item) { return item.close(); });
             this.setData({ catchMove: true });
             this.swipeMove(this.startOffset + this.deltaX);
         },
@@ -123,12 +124,12 @@ component_1.VantComponent({
                 this.$emit('close', {
                     position: position,
                     instance: this,
-                    name: this.data.name
+                    name: this.data.name,
                 });
             }
             else {
                 this.swipeMove(0);
             }
-        }
-    }
+        },
+    },
 });

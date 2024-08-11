@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.isSameSecond = exports.parseFormat = exports.parseTimeData = void 0;
 function padZero(num, targetLength) {
     if (targetLength === void 0) { targetLength = 2; }
     var str = num + '';
@@ -23,7 +24,7 @@ function parseTimeData(time) {
         hours: hours,
         minutes: minutes,
         seconds: seconds,
-        milliseconds: milliseconds
+        milliseconds: milliseconds,
     };
 }
 exports.parseTimeData = parseTimeData;

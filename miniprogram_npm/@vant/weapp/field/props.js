@@ -1,65 +1,59 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.textareaProps = exports.inputProps = exports.commonProps = void 0;
 exports.commonProps = {
-    value: {
-        type: String,
-        observer: function (value) {
-            if (value !== this.value) {
-                this.setData({ innerValue: value });
-                this.value = value;
-            }
-        }
-    },
+    value: String,
     placeholder: String,
     placeholderStyle: String,
     placeholderClass: String,
     disabled: Boolean,
     maxlength: {
         type: Number,
-        value: -1
+        value: -1,
     },
     cursorSpacing: {
         type: Number,
-        value: 50
+        value: 50,
     },
     autoFocus: Boolean,
     focus: Boolean,
     cursor: {
         type: Number,
-        value: -1
+        value: -1,
     },
     selectionStart: {
         type: Number,
-        value: -1
+        value: -1,
     },
     selectionEnd: {
         type: Number,
-        value: -1
+        value: -1,
     },
     adjustPosition: {
         type: Boolean,
-        value: true
+        value: true,
     },
-    holdKeyboard: Boolean
+    holdKeyboard: Boolean,
 };
 exports.inputProps = {
     type: {
         type: String,
-        value: 'text'
+        value: 'text',
     },
     password: Boolean,
     confirmType: String,
-    confirmHold: Boolean
+    confirmHold: Boolean,
+    alwaysEmbed: Boolean,
 };
 exports.textareaProps = {
     autoHeight: Boolean,
     fixed: Boolean,
     showConfirmBar: {
         type: Boolean,
-        value: true
+        value: true,
     },
     disableDefaultPadding: {
         type: Boolean,
-        value: true
+        value: true,
     },
 };

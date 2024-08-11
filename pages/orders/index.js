@@ -22,7 +22,8 @@ Page({
     this.shippingCarInfo()
   },
   async goodsCategory() {
-    const res = await WXAPI.goodsCategory()
+    // https://www.yuque.com/apifm/nu0f75/racmle
+    const res = await WXAPI.goodsCategoryV2()
     if (res.code == 0) {
       this.setData({
         goodsCategory: res.data
@@ -47,7 +48,8 @@ Page({
       title: '加载中',
     })
     const shopInfo = wx.getStorageSync('shopInfo')
-    const res = await WXAPI.goods({
+    // https://www.yuque.com/apifm/nu0f75/wg5t98
+    const res = await WXAPI.goodsv2({
       categoryId: this.data.cid,
       shopId: shopInfo.id,
       page: 1,
@@ -61,7 +63,7 @@ Page({
       return
     }
     this.setData({
-      goodsList: res.data
+      goodsList: res.data.result
     });
   },
   async shippingCarInfo(){
@@ -69,6 +71,7 @@ Page({
     if (!token) {
       return
     }
+    // https://www.yuque.com/apifm/nu0f75/awql14
     const res = await WXAPI.shippingCarInfo(token)
     if (res.code == 0) {
       this.setData({
@@ -106,7 +109,13 @@ Page({
       })
       return
     }
-    const res = await WXAPI.shippingCarInfoAddItem(wx.getStorageSync('token'), curGood.id, 1, [])    
+    // https://www.yuque.com/apifm/nu0f75/et6m6m
+    const res = await WXAPI.shippingCarInfoAddItemV2({
+      token: wx.getStorageSync('token'),
+      goodsId: curGood.id,
+      number: 1,
+      sku: []
+    })
     if (res.code == 30002) {
       // 需要 sku
       wx.navigateTo({
@@ -145,6 +154,7 @@ Page({
       wx.showLoading({
         title: '删除中...',
       })
+      // https://www.yuque.com/apifm/nu0f75/pndgyc
       const res = await WXAPI.shippingCarInfoRemoveItem(token, key)
       wx.hideLoading()
       if (res.code != 0) {
@@ -160,6 +170,7 @@ Page({
       wx.showLoading({
         title: '',
       })
+      // https://www.yuque.com/apifm/nu0f75/kbi5b0
       await WXAPI.shippingCarInfoModifyNumber(token, key, e.detail)
       this.shippingCarInfo()
       wx.hideLoading()

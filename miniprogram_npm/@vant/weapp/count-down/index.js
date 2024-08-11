@@ -5,26 +5,26 @@ var utils_1 = require("./utils");
 function simpleTick(fn) {
     return setTimeout(fn, 30);
 }
-component_1.VantComponent({
+(0, component_1.VantComponent)({
     props: {
         useSlot: Boolean,
         millisecond: Boolean,
         time: {
             type: Number,
-            observer: 'reset'
+            observer: 'reset',
         },
         format: {
             type: String,
-            value: 'HH:mm:ss'
+            value: 'HH:mm:ss',
         },
         autoStart: {
             type: Boolean,
-            value: true
-        }
+            value: true,
+        },
     },
     data: {
-        timeData: utils_1.parseTimeData(0),
-        formattedTime: '0'
+        timeData: (0, utils_1.parseTimeData)(0),
+        formattedTime: '0',
     },
     destroyed: function () {
         clearTimeout(this.tid);
@@ -75,7 +75,7 @@ component_1.VantComponent({
             var _this = this;
             this.tid = simpleTick(function () {
                 var remain = _this.getRemain();
-                if (!utils_1.isSameSecond(remain, _this.remain) || remain === 0) {
+                if (!(0, utils_1.isSameSecond)(remain, _this.remain) || remain === 0) {
                     _this.setRemain(remain);
                 }
                 if (_this.remain !== 0) {
@@ -88,17 +88,17 @@ component_1.VantComponent({
         },
         setRemain: function (remain) {
             this.remain = remain;
-            var timeData = utils_1.parseTimeData(remain);
+            var timeData = (0, utils_1.parseTimeData)(remain);
             if (this.data.useSlot) {
                 this.$emit('change', timeData);
             }
             this.setData({
-                formattedTime: utils_1.parseFormat(this.data.format, timeData)
+                formattedTime: (0, utils_1.parseFormat)(this.data.format, timeData),
             });
             if (remain === 0) {
                 this.pause();
                 this.$emit('finish');
             }
-        }
-    }
+        },
+    },
 });

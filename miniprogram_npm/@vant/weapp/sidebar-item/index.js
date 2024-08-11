@@ -1,21 +1,16 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var component_1 = require("../common/component");
-component_1.VantComponent({
-    classes: [
-        'active-class',
-        'disabled-class',
-    ],
-    relation: {
-        type: 'ancestor',
-        name: 'sidebar',
-        current: 'sidebar-item',
-    },
+var relation_1 = require("../common/relation");
+(0, component_1.VantComponent)({
+    classes: ['active-class', 'disabled-class'],
+    relation: (0, relation_1.useParent)('sidebar'),
     props: {
         dot: Boolean,
+        badge: null,
         info: null,
         title: String,
-        disabled: Boolean
+        disabled: Boolean,
     },
     methods: {
         onClick: function () {
@@ -32,6 +27,6 @@ component_1.VantComponent({
         },
         setActive: function (selected) {
             return this.setData({ selected: selected });
-        }
-    }
+        },
+    },
 });

@@ -43,13 +43,18 @@ Page({
       wx.navigateBack()
       return
     }
+    // https://www.yuque.com/apifm/nu0f75/awql14
     const res = await WXAPI.shippingCarInfo(token)
     if (res.code == 0) {
       let purchaseNotes = ''
       for (let index = 0; index < res.data.items.length; index++) {
         const element = res.data.items[index];
         const goodsId = element.goodsId
-        const resGoods = await WXAPI.goodsDetail(goodsId)
+        // https://www.yuque.com/apifm/nu0f75/vuml8a
+        const resGoods = await WXAPI.goodsDetailV2({
+          id: goodsId,
+          token: wx.getStorageSync('token')
+        })
         if (resGoods.code == 0 && resGoods.data.basicInfo.purchaseNotes) {
           purchaseNotes += resGoods.data.basicInfo.purchaseNotes
         }
@@ -61,6 +66,7 @@ Page({
     }
   },
   async userDetail() {
+    // https://www.yuque.com/apifm/nu0f75/zgf8pu
     const res = await WXAPI.userDetail(wx.getStorageSync('token'))
     if (res.code == 0 && res.data.base.mobile) {
       this.setData({
@@ -68,37 +74,21 @@ Page({
       })
     }
   },
-  async getPhoneNumber(e) {
-    if (!e.detail.errMsg || e.detail.errMsg != "getPhoneNumber:ok") {
-      wx.showModal({
-        title: '提示',
-        content: e.detail.errMsg,
-        showCancel: false
-      })
-      return;
-    }
-    WXAPI.bindMobileWxapp(wx.getStorageSync('token'), this.data.code, e.detail.encryptedData, e.detail.iv).then(res => {
-      AUTH.wxaCode().then(code => {
-        this.data.code = code
-      })
-      if (res.code === 10002) {
-        this.setData({
-          wxlogin: false
-        })
-        return
-      }
-      if (res.code == 0) {
-        wx.showToast({
-          title: '绑定成功',
-          icon: 'success'
-        })
-        this.userDetail();
-      } else {
-        wx.showToast({
-          title: res.msg,
-          icon: 'success'
-        })
-      }
+  bindMobile() {
+    this.setData({
+      bindMobileShow: true
+    })
+  },
+  bindMobileOk(e) {
+    console.log(e.detail); // 这里是组件里data的数据
+    this.setData({
+      bindMobileShow: false
+    })
+    this.userDetail()
+  },
+  bindMobileCancel() {
+    this.setData({
+      bindMobileShow: false
     })
   },
   async createorder() {
@@ -129,6 +119,7 @@ Page({
       shopIdZt: this.data.shopInfo.id,
       shopNameZt: this.data.shopInfo.name
     }
+    // https://www.yuque.com/apifm/nu0f75/qx4w98
     const res = await WXAPI.orderCreate(postData)
     if (res.code != 0) {
       wx.showToast({
@@ -137,12 +128,13 @@ Page({
       })
       return;
     }
+    // https://www.yuque.com/apifm/nu0f75/ps2q28
     await WXAPI.shippingCarInfoRemoveAll(token)
     wx.showToast({
       title: '下单成功！',
       icon: 'success'
     })
-    // 直接弹出微信支付
+    // 直接弹出微信支付 https://www.yuque.com/apifm/nu0f75/wrqkcb
     const res1 = await WXAPI.userAmount(wx.getStorageSync('token'))
     if (res1.code != 0) {
       wx.showToast({
@@ -165,8 +157,11 @@ Page({
         cancelText: "暂不付款",
         success: res2 => {
           if (res2.confirm) {
-            // 使用余额支付
-            WXAPI.orderPay(wx.getStorageSync('token'), res.data.id).then(res3 => {
+            // 使用余额支付 https://www.yuque.com/apifm/nu0f75/lwt2vi
+            WXAPI.orderPayV2({
+              token: wx.getStorageSync('token'),
+              orderId: res.data.id
+            }).then(res3 => {
               if (res3.code != 0) {
                 wx.showToast({
                   title: res3.msg,

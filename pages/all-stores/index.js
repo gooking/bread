@@ -35,6 +35,7 @@ Page({
 
   },
   async fetchShops(latitude, longitude, kw){
+    // https://www.yuque.com/apifm/nu0f75/vvgeq9
     const res = await WXAPI.fetchShops({
       curlatitude: latitude,
       curlongitude: longitude,

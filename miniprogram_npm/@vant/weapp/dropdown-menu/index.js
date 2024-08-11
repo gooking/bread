@@ -1,60 +1,58 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var component_1 = require("../common/component");
+var relation_1 = require("../common/relation");
 var utils_1 = require("../common/utils");
 var ARRAY = [];
-component_1.VantComponent({
+(0, component_1.VantComponent)({
     field: true,
-    relation: {
-        name: 'dropdown-item',
-        type: 'descendant',
-        current: 'dropdown-menu',
-        linked: function () {
-            this.updateItemListData();
-        },
-        unlinked: function () {
-            this.updateItemListData();
-        }
-    },
+    classes: ['title-class'],
+    relation: (0, relation_1.useChildren)('dropdown-item', function () {
+        this.updateItemListData();
+    }),
     props: {
         activeColor: {
             type: String,
-            observer: 'updateChildrenData'
+            observer: 'updateChildrenData',
         },
         overlay: {
             type: Boolean,
             value: true,
-            observer: 'updateChildrenData'
+            observer: 'updateChildrenData',
         },
         zIndex: {
             type: Number,
-            value: 10
+            value: 10,
         },
         duration: {
             type: Number,
             value: 200,
-            observer: 'updateChildrenData'
+            observer: 'updateChildrenData',
         },
         direction: {
             type: String,
             value: 'down',
-            observer: 'updateChildrenData'
+            observer: 'updateChildrenData',
+        },
+        safeAreaTabBar: {
+            type: Boolean,
+            value: false,
         },
         closeOnClickOverlay: {
             type: Boolean,
             value: true,
-            observer: 'updateChildrenData'
+            observer: 'updateChildrenData',
         },
         closeOnClickOutside: {
             type: Boolean,
-            value: true
-        }
+            value: true,
+        },
     },
     data: {
-        itemListData: []
+        itemListData: [],
     },
     beforeCreate: function () {
-        var windowHeight = wx.getSystemInfoSync().windowHeight;
+        var windowHeight = (0, utils_1.getSystemInfoSync)().windowHeight;
         this.windowHeight = windowHeight;
         ARRAY.push(this);
     },
@@ -65,7 +63,7 @@ component_1.VantComponent({
     methods: {
         updateItemListData: function () {
             this.setData({
-                itemListData: this.children.map(function (child) { return child.data; })
+                itemListData: this.children.map(function (child) { return child.data; }),
             });
         },
         updateChildrenData: function () {
@@ -92,15 +90,15 @@ component_1.VantComponent({
         getChildWrapperStyle: function () {
             var _this = this;
             var _a = this.data, zIndex = _a.zIndex, direction = _a.direction;
-            return this.getRect('.van-dropdown-menu').then(function (rect) {
+            return (0, utils_1.getRect)(this, '.van-dropdown-menu').then(function (rect) {
                 var _a = rect.top, top = _a === void 0 ? 0 : _a, _b = rect.bottom, bottom = _b === void 0 ? 0 : _b;
                 var offset = direction === 'down' ? bottom : _this.windowHeight - top;
-                var wrapperStyle = "z-index: " + zIndex + ";";
+                var wrapperStyle = "z-index: ".concat(zIndex, ";");
                 if (direction === 'down') {
-                    wrapperStyle += "top: " + utils_1.addUnit(offset) + ";";
+                    wrapperStyle += "top: ".concat((0, utils_1.addUnit)(offset), ";");
                 }
                 else {
-                    wrapperStyle += "bottom: " + utils_1.addUnit(offset) + ";";
+                    wrapperStyle += "bottom: ".concat((0, utils_1.addUnit)(offset), ";");
                 }
                 return wrapperStyle;
             });
@@ -119,6 +117,6 @@ component_1.VantComponent({
                 });
                 this.toggleItem(index);
             }
-        }
-    }
+        },
+    },
 });

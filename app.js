@@ -1,8 +1,10 @@
 const WXAPI = require('apifm-wxapi')
 const AUTH = require('utils/auth')
+const CONFIG = require('config')
 App({
   onLaunch: function () {
-    WXAPI.init('yuanqibread')
+    WXAPI.init(CONFIG.subDomain)
+    WXAPI.setMerchantId(CONFIG.merchantId)
     // 加载字体
     wx.loadFontFace({
       global: true,
@@ -23,6 +25,7 @@ App({
         }
       })
     })
+    // https://www.yuque.com/apifm/nu0f75/dis5tl
     WXAPI.queryConfigBatch('mallName,order_remark_msg,order_hx_uids').then(res => {
       if (res.code == 0) {
         res.data.forEach(config => {
@@ -51,6 +54,7 @@ App({
             wx.login({
               success(loginRes) {
                 if (loginRes.code) {
+                  // https://www.yuque.com/apifm/nu0f75/uthem8
                   WXAPI.shareGroupGetScore(
                     loginRes.code,
                     e.query.inviter_id,

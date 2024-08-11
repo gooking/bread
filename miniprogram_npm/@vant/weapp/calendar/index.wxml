@@ -1,4 +1,5 @@
 <wxs src="./index.wxs" module="computed" />
+<wxs src="../wxs/utils.wxs" module="utils" />
 
 <import src="./calendar.wxml" />
 
@@ -11,21 +12,16 @@
   position="{{ position }}"
   closeable="{{ showTitle || showSubtitle }}"
   close-on-click-overlay="{{ closeOnClickOverlay }}"
+  safe-area-inset-bottom="{{ safeAreaInsetBottom }}"
+  root-portal="{{ rootPortal }}"
   bind:enter="onOpen"
   bind:close="onClose"
   bind:after-enter="onOpened"
   bind:after-leave="onClosed"
 >
-  <template
-    is="calendar"
-    data="{{ title, subtitle, showTitle, showSubtitle, minDate, maxDate, type, color, showMark, formatter, rowHeight, currentDate, safeAreaInsetBottom, showConfirm, confirmDisabledText, confirmText, scrollIntoView, allowSameDay }}"
-  />
+  <include src="./calendar.wxml" />
 </van-popup>
 
-<template
-  wx:else
-  is="calendar"
-  data="{{ title, subtitle, showTitle, showSubtitle, minDate, maxDate, type, color, showMark, formatter, rowHeight, currentDate, safeAreaInsetBottom, showConfirm, confirmDisabledText, confirmText, scrollIntoView, allowSameDay }}"
-/>
+<include wx:else src="./calendar.wxml" />
 
 <van-toast id="van-toast" />

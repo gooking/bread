@@ -46,58 +46,17 @@ Page({
     })
   },
   async userDetail() {
+    // https://www.yuque.com/apifm/nu0f75/zgf8pu
     const res = await WXAPI.userDetail(wx.getStorageSync('token'))
     if (res.code == 0) {
       this.setData({
+        id: res.data.base.id,
         nick: res.data.base.nick,
         mobile: res.data.base.mobile ? res.data.base.mobile : '点击自动获取',
         sexIndex: res.data.base.gender,
         birthday: res.data.base.birthday
       })
     }
-  },
-  async getUserInfo () {
-    wx.showLoading({
-      title: '...',
-    })
-    const userInfo = await AUTH.getUserInfo()
-    this.setData({
-      nick: userInfo.userInfo.nickName,
-      avatarUrl: userInfo.userInfo.avatarUrl,
-    })
-    wx.hideLoading()
-  },
-  async getPhoneNumber(e) {
-    if (!e.detail.errMsg || e.detail.errMsg != "getPhoneNumber:ok") {
-      wx.showModal({
-        title: '提示',
-        content: e.detail.errMsg,
-        showCancel: false
-      })
-      return;
-    }
-    wx.showLoading({
-      title: '...',
-    })
-    WXAPI.bindMobileWxapp(wx.getStorageSync('token'), this.data.code, e.detail.encryptedData, e.detail.iv).then(res => {
-      AUTH.wxaCode().then(code => {
-        this.data.code = code
-      })
-      wx.hideLoading()
-      AUTH.wxaCode().then(code => {
-        this.data.code = code
-      })
-      if (res.code == 0 || res.code == 10004) {
-        this.setData({
-          mobile: res.data
-        })
-      } else {
-        wx.showToast({
-          title: res.msg,
-          icon: 'success'
-        })
-      }
-    })
   },
   bindSexChange(e) {
     this.setData({
@@ -125,6 +84,7 @@ Page({
     wx.showLoading({
       title: '...',
     })
+    // https://www.yuque.com/apifm/nu0f75/ykr2zr
     const res = await WXAPI.modifyUserInfo({
       token: wx.getStorageSync('token'),
       nick: this.data.nick,
@@ -141,5 +101,27 @@ Page({
         complete: (res) => {},
       })
     }
+  },
+  copyID() {
+    wx.setClipboardData({
+      data: this.data.id + '',
+    })
+  },
+  bindMobile() {
+    this.setData({
+      bindMobileShow: true
+    })
+  },
+  bindMobileOk(e) {
+    console.log(e.detail); // 这里是组件里data的数据
+    this.setData({
+      bindMobileShow: false,
+      mobile: e.detail.mobile
+    })
+  },
+  bindMobileCancel() {
+    this.setData({
+      bindMobileShow: false
+    })
   },
 })

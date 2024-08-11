@@ -21,9 +21,8 @@
     </view>
     <view class="text">{{mobile}}</view>
   </view>
-  <view class="get1-box">
+  <view class="get1-box" bind:tap="bindMobile">
     <view class="get1">自动填写</view>
-    <button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber"></button>
   </view>
 </view>
 <navigator url="/pages/select-time/index" hover-class="none">
@@ -93,3 +92,11 @@
   </view>
   <view class="pay-byn" bindtap="createorder">结算</view>
 </view>
+
+<bind-mobile
+  title="绑定手机号码"
+  alarmText="为保障您的资金安全，请先绑定手机号码"
+  show="{{ bindMobileShow }}"
+  bind:cancel="bindMobileCancel"
+  bind:ok="bindMobileOk"
+/>

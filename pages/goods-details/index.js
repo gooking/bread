@@ -29,7 +29,11 @@ Page({
 
   },
   async goodsDetail() {
-    const res = await WXAPI.goodsDetail(this.data.goodsId)
+    // https://www.yuque.com/apifm/nu0f75/vuml8a
+    const res = await WXAPI.goodsDetailV2({
+      token: wx.getStorageSync('token'),
+      id: this.data.goodsId,
+    })
     if (res.code == 0) {
       const kouwei = this.data.kouwei
       if (res.data.properties) {
@@ -86,7 +90,13 @@ Page({
         optionValueId: kouwei.cid
       })
     }
-    const res = await WXAPI.shippingCarInfoAddItem(wx.getStorageSync('token'), this.data.goodsDetail.basicInfo.id, 1, sku)    
+    // https://www.yuque.com/apifm/nu0f75/et6m6m
+    const res = await WXAPI.shippingCarInfoAddItemV2({
+      token: wx.getStorageSync('token'),
+      goodsId: this.data.goodsDetail.basicInfo.id,
+      number: 1,
+      sku
+    })
     if (res.code != 0) {
       wx.showToast({
         title: res.msg,
@@ -103,6 +113,7 @@ Page({
   async checkBuyedNumber (goodsId) {
     const kouwei = this.data.kouwei[this.data.kouweiIndex]
     const token = wx.getStorageSync('token')
+    // https://www.yuque.com/apifm/nu0f75/awql14
     const res = await WXAPI.shippingCarInfo(token)
     if (res.code != 0) {
       this.setData({
@@ -144,6 +155,7 @@ Page({
       wx.showLoading({
         title: '删除中...',
       })
+      // https://www.yuque.com/apifm/nu0f75/pndgyc
       const res = await WXAPI.shippingCarInfoRemoveItem(token, key)
       wx.hideLoading()
       if (res.code != 0) {
@@ -159,6 +171,7 @@ Page({
       wx.showLoading({
         title: '',
       })
+      // https://www.yuque.com/apifm/nu0f75/kbi5b0
       await WXAPI.shippingCarInfoModifyNumber(token, key, e.detail)
       this.checkBuyedNumber(this.data.goodsDetail.basicInfo.id)
       wx.hideLoading()

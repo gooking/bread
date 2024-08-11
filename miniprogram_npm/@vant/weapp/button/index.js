@@ -2,15 +2,24 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var component_1 = require("../common/component");
 var button_1 = require("../mixins/button");
-var open_type_1 = require("../mixins/open-type");
-component_1.VantComponent({
-    mixins: [button_1.button, open_type_1.openType],
+var version_1 = require("../common/version");
+var mixins = [button_1.button];
+if ((0, version_1.canIUseFormFieldButton)()) {
+    mixins.push('wx://form-field-button');
+}
+(0, component_1.VantComponent)({
+    mixins: mixins,
     classes: ['hover-class', 'loading-class'],
     data: {
-        baseStyle: ''
+        baseStyle: '',
     },
     props: {
+        formType: String,
         icon: String,
+        classPrefix: {
+            type: String,
+            value: 'van-icon',
+        },
         plain: Boolean,
         block: Boolean,
         round: Boolean,
@@ -22,50 +31,37 @@ component_1.VantComponent({
         customStyle: String,
         loadingType: {
             type: String,
-            value: 'circular'
+            value: 'circular',
         },
         type: {
             type: String,
-            value: 'default'
+            value: 'default',
         },
+        dataset: null,
         size: {
             type: String,
-            value: 'normal'
+            value: 'normal',
         },
         loadingSize: {
             type: String,
-            value: '20px'
+            value: '20px',
         },
-        color: {
-            type: String,
-            observer: function (color) {
-                var style = '';
-                if (color) {
-                    style += "color: " + (this.data.plain ? color : 'white') + ";";
-                    if (!this.data.plain) {
-                        // Use background instead of backgroundColor to make linear-gradient work
-                        style += "background: " + color + ";";
-                    }
-                    // hide border when color is linear-gradient
-                    if (color.indexOf('gradient') !== -1) {
-                        style += 'border: 0;';
-                    }
-                    else {
-                        style += "border-color: " + color + ";";
-                    }
-                }
-                if (style !== this.data.baseStyle) {
-                    this.setData({ baseStyle: style });
-                }
-            }
-        }
+        color: String,
     },
     methods: {
-        onClick: function () {
-            if (!this.data.loading) {
-                this.$emit('click');
+        onClick: function (event) {
+            var _this = this;
+            this.$emit('click', event);
+            var _a = this.data, canIUseGetUserProfile = _a.canIUseGetUserProfile, openType = _a.openType, getUserProfileDesc = _a.getUserProfileDesc, lang = _a.lang;
+            if (openType === 'getUserInfo' && canIUseGetUserProfile) {
+                wx.getUserProfile({
+                    desc: getUserProfileDesc || '  ',
+                    lang: lang || 'en',
+                    complete: function (userProfile) {
+                        _this.$emit('getuserinfo', userProfile);
+                    },
+                });
             }
         },
-        noop: function () { }
-    }
+    },
 });

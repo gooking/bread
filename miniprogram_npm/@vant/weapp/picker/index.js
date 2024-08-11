@@ -13,31 +13,33 @@ var __assign = (this && this.__assign) || function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 var component_1 = require("../common/component");
 var shared_1 = require("./shared");
-component_1.VantComponent({
+(0, component_1.VantComponent)({
     classes: ['active-class', 'toolbar-class', 'column-class'],
     props: __assign(__assign({}, shared_1.pickerProps), { valueKey: {
             type: String,
-            value: 'text'
+            value: 'text',
         }, toolbarPosition: {
             type: String,
-            value: 'top'
+            value: 'top',
         }, defaultIndex: {
             type: Number,
-            value: 0
+            value: 0,
         }, columns: {
             type: Array,
             value: [],
             observer: function (columns) {
                 if (columns === void 0) { columns = []; }
                 this.simple = columns.length && !columns[0].values;
-                this.children = this.selectAllComponents('.van-picker__column');
                 if (Array.isArray(this.children) && this.children.length) {
                     this.setColumns().catch(function () { });
                 }
-            }
+            },
         } }),
     beforeCreate: function () {
-        this.children = [];
+        var _this = this;
+        Object.defineProperty(this, 'children', {
+            get: function () { return _this.selectAllComponents('.van-picker__column') || []; },
+        });
     },
     methods: {
         noop: function () { },
@@ -55,13 +57,13 @@ component_1.VantComponent({
             if (this.simple) {
                 this.$emit(type, {
                     value: this.getColumnValue(0),
-                    index: this.getColumnIndex(0)
+                    index: this.getColumnIndex(0),
                 });
             }
             else {
                 this.$emit(type, {
                     value: this.getValues(),
-                    index: this.getIndexes()
+                    index: this.getIndexes(),
                 });
             }
         },
@@ -70,14 +72,14 @@ component_1.VantComponent({
                 this.$emit('change', {
                     picker: this,
                     value: this.getColumnValue(0),
-                    index: this.getColumnIndex(0)
+                    index: this.getColumnIndex(0),
                 });
             }
             else {
                 this.$emit('change', {
                     picker: this,
                     value: this.getValues(),
-                    index: event.currentTarget.dataset.index
+                    index: event.currentTarget.dataset.index,
                 });
             }
         },
@@ -154,6 +156,6 @@ component_1.VantComponent({
                 return _this.setColumnIndex(columnIndex, optionIndex);
             });
             return Promise.all(stack);
-        }
-    }
+        },
+    },
 });

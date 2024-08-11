@@ -2,8 +2,9 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var component_1 = require("../common/component");
 var utils_1 = require("../common/utils");
+var validator_1 = require("../common/validator");
 var DEFAULT_DURATION = 200;
-component_1.VantComponent({
+(0, component_1.VantComponent)({
     classes: ['active-class'],
     props: {
         valueKey: String,
@@ -12,15 +13,15 @@ component_1.VantComponent({
         visibleItemCount: Number,
         initialOptions: {
             type: Array,
-            value: []
+            value: [],
         },
         defaultIndex: {
             type: Number,
             value: 0,
             observer: function (value) {
                 this.setIndex(value);
-            }
-        }
+            },
+        },
     },
     data: {
         startY: 0,
@@ -28,14 +29,14 @@ component_1.VantComponent({
         duration: 0,
         startOffset: 0,
         options: [],
-        currentIndex: 0
+        currentIndex: 0,
     },
     created: function () {
         var _this = this;
         var _a = this.data, defaultIndex = _a.defaultIndex, initialOptions = _a.initialOptions;
         this.set({
             currentIndex: defaultIndex,
-            options: initialOptions
+            options: initialOptions,
         }).then(function () {
             _this.setIndex(defaultIndex);
         });
@@ -48,21 +49,21 @@ component_1.VantComponent({
             this.setData({
                 startY: event.touches[0].clientY,
                 startOffset: this.data.offset,
-                duration: 0
+                duration: 0,
             });
         },
         onTouchMove: function (event) {
             var data = this.data;
             var deltaY = event.touches[0].clientY - data.startY;
             this.setData({
-                offset: utils_1.range(data.startOffset + deltaY, -(this.getCount() * data.itemHeight), data.itemHeight)
+                offset: (0, utils_1.range)(data.startOffset + deltaY, -(this.getCount() * data.itemHeight), data.itemHeight),
             });
         },
         onTouchEnd: function () {
             var data = this.data;
             if (data.offset !== data.startOffset) {
                 this.setData({ duration: DEFAULT_DURATION });
-                var index = utils_1.range(Math.round(-data.offset / data.itemHeight), 0, this.getCount() - 1);
+                var index = (0, utils_1.range)(Math.round(-data.offset / data.itemHeight), 0, this.getCount() - 1);
                 this.setIndex(index, true);
             }
         },
@@ -73,7 +74,7 @@ component_1.VantComponent({
         adjustIndex: function (index) {
             var data = this.data;
             var count = this.getCount();
-            index = utils_1.range(index, 0, count);
+            index = (0, utils_1.range)(index, 0, count);
             for (var i = index; i < count; i++) {
                 if (!this.isDisabled(data.options[i]))
                     return i;
@@ -84,11 +85,11 @@ component_1.VantComponent({
             }
         },
         isDisabled: function (option) {
-            return utils_1.isObj(option) && option.disabled;
+            return (0, validator_1.isObj)(option) && option.disabled;
         },
         getOptionText: function (option) {
             var data = this.data;
-            return utils_1.isObj(option) && data.valueKey in option
+            return (0, validator_1.isObj)(option) && data.valueKey in option
                 ? option[data.valueKey]
                 : option;
         },
@@ -116,6 +117,6 @@ component_1.VantComponent({
         getValue: function () {
             var data = this.data;
             return data.options[data.currentIndex];
-        }
-    }
+        },
+    },
 });

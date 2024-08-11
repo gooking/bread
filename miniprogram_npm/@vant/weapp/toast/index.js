@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var component_1 = require("../common/component");
-component_1.VantComponent({
+(0, component_1.VantComponent)({
     props: {
         show: Boolean,
         mask: Boolean,
@@ -9,23 +9,23 @@ component_1.VantComponent({
         forbidClick: Boolean,
         zIndex: {
             type: Number,
-            value: 1000
+            value: 1000,
         },
         type: {
             type: String,
-            value: 'text'
+            value: 'text',
         },
         loadingType: {
             type: String,
-            value: 'circular'
+            value: 'circular',
         },
         position: {
             type: String,
-            value: 'middle'
-        }
+            value: 'middle',
+        },
     },
     methods: {
         // for prevent touchmove
-        noop: function () { }
-    }
+        noop: function () { },
+    },
 });

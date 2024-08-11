@@ -2,42 +2,46 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var component_1 = require("../../../common/component");
 var utils_1 = require("../../utils");
-component_1.VantComponent({
+(0, component_1.VantComponent)({
     props: {
         date: {
             type: null,
-            observer: 'setDays'
+            observer: 'setDays',
         },
         type: {
             type: String,
-            observer: 'setDays'
+            observer: 'setDays',
         },
         color: String,
         minDate: {
             type: null,
-            observer: 'setDays'
+            observer: 'setDays',
         },
         maxDate: {
             type: null,
-            observer: 'setDays'
+            observer: 'setDays',
         },
         showMark: Boolean,
-        rowHeight: [Number, String],
+        rowHeight: null,
         formatter: {
             type: null,
-            observer: 'setDays'
+            observer: 'setDays',
         },
         currentDate: {
-            type: [null, Array],
-            observer: 'setDays'
+            type: null,
+            observer: 'setDays',
+        },
+        firstDayOfWeek: {
+            type: Number,
+            observer: 'setDays',
         },
         allowSameDay: Boolean,
         showSubtitle: Boolean,
-        showMonthTitle: Boolean
+        showMonthTitle: Boolean,
     },
     data: {
         visible: true,
-        days: []
+        days: [],
     },
     methods: {
         onClick: function (event) {
@@ -52,7 +56,7 @@ component_1.VantComponent({
             var startDate = new Date(this.data.date);
             var year = startDate.getFullYear();
             var month = startDate.getMonth();
-            var totalDay = utils_1.getMonthEndDay(startDate.getFullYear(), startDate.getMonth() + 1);
+            var totalDay = (0, utils_1.getMonthEndDay)(startDate.getFullYear(), startDate.getMonth() + 1);
             for (var day = 1; day <= totalDay; day++) {
                 var date = new Date(year, month, day);
                 var type = this.getDayType(date);
@@ -60,7 +64,7 @@ component_1.VantComponent({
                     date: date,
                     type: type,
                     text: day,
-                    bottomInfo: this.getBottomInfo(type)
+                    bottomInfo: this.getBottomInfo(type),
                 };
                 if (this.data.formatter) {
                     config = this.data.formatter(config);
@@ -75,11 +79,11 @@ component_1.VantComponent({
                 return '';
             }
             var isSelected = function (date) {
-                return currentDate.some(function (item) { return utils_1.compareDay(item, date) === 0; });
+                return currentDate.some(function (item) { return (0, utils_1.compareDay)(item, date) === 0; });
             };
             if (isSelected(day)) {
-                var prevDay = utils_1.getPrevDay(day);
-                var nextDay = utils_1.getNextDay(day);
+                var prevDay = (0, utils_1.getPrevDay)(day);
+                var nextDay = (0, utils_1.getNextDay)(day);
                 var prevSelected = isSelected(prevDay);
                 var nextSelected = isSelected(nextDay);
                 if (prevSelected && nextSelected) {
@@ -95,17 +99,17 @@ component_1.VantComponent({
         getRangeDayType: function (day) {
             var _a = this.data, currentDate = _a.currentDate, allowSameDay = _a.allowSameDay;
             if (!Array.isArray(currentDate)) {
-                return;
+                return '';
             }
             var startDay = currentDate[0], endDay = currentDate[1];
             if (!startDay) {
-                return;
+                return '';
             }
-            var compareToStart = utils_1.compareDay(day, startDay);
+            var compareToStart = (0, utils_1.compareDay)(day, startDay);
             if (!endDay) {
                 return compareToStart === 0 ? 'start' : '';
             }
-            var compareToEnd = utils_1.compareDay(day, endDay);
+            var compareToEnd = (0, utils_1.compareDay)(day, endDay);
             if (compareToStart === 0 && compareToEnd === 0 && allowSameDay) {
                 return 'start-end';
             }
@@ -118,14 +122,15 @@ component_1.VantComponent({
             if (compareToStart > 0 && compareToEnd < 0) {
                 return 'middle';
             }
+            return '';
         },
         getDayType: function (day) {
             var _a = this.data, type = _a.type, minDate = _a.minDate, maxDate = _a.maxDate, currentDate = _a.currentDate;
-            if (utils_1.compareDay(day, minDate) < 0 || utils_1.compareDay(day, maxDate) > 0) {
+            if ((0, utils_1.compareDay)(day, minDate) < 0 || (0, utils_1.compareDay)(day, maxDate) > 0) {
                 return 'disabled';
             }
             if (type === 'single') {
-                return utils_1.compareDay(day, currentDate) === 0 ? 'selected' : '';
+                return (0, utils_1.compareDay)(day, currentDate) === 0 ? 'selected' : '';
             }
             if (type === 'multiple') {
                 return this.getMultipleDayType(day);
@@ -134,6 +139,7 @@ component_1.VantComponent({
             if (type === 'range') {
                 return this.getRangeDayType(day);
             }
+            return '';
         },
         getBottomInfo: function (type) {
             if (this.data.type === 'range') {
@@ -147,6 +153,6 @@ component_1.VantComponent({
                     return '开始/结束';
                 }
             }
-        }
-    }
+        },
+    },
 });

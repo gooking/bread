@@ -29,6 +29,7 @@ Page({
     })
   },
   async userAmount() {
+    // https://www.yuque.com/apifm/nu0f75/wrqkcb
     const res = await WXAPI.userAmount(wx.getStorageSync('token'))
     if (res.code == 0) {
       this.setData({
@@ -37,6 +38,7 @@ Page({
     }
   },
   async scoreLogs() {
+    // https://www.yuque.com/apifm/nu0f75/ezi14x
     const res = await WXAPI.scoreLogs({
       token: wx.getStorageSync('token'),
       page:1,

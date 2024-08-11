@@ -21,6 +21,7 @@ Page({
 
   },
   async orderDetail() {
+    // https://www.yuque.com/apifm/nu0f75/oamel8
     const res = await WXAPI.orderDetail(wx.getStorageSync('token'), '', this.data.hxNumber)
     if (res.code == 0) {
       this.setData({
@@ -30,6 +31,7 @@ Page({
     }
   },
   async shopSubdetail(shopId) {
+    // https://www.yuque.com/apifm/nu0f75/cu4cfi
     const res = await WXAPI.shopSubdetail(shopId)
     if (res.code == 0) {
       this.setData({
@@ -54,7 +56,11 @@ Page({
     wx.showLoading({
       title: '处理中...',
     })
-    const res = await WXAPI.orderHX(this.data.hxNumber)
+    // https://www.yuque.com/apifm/nu0f75/sq4sma
+    const res = await WXAPI.orderHXV2({
+      token: wx.getStorageSync('token'),
+      hxNumber: this.data.hxNumber
+    })
     wx.hideLoading()
     if (res.code != 0) {
       wx.showModal({

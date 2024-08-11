@@ -2,14 +2,14 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var link_1 = require("../mixins/link");
 var component_1 = require("../common/component");
-component_1.VantComponent({
+(0, component_1.VantComponent)({
     classes: [
         'num-class',
         'desc-class',
         'thumb-class',
         'title-class',
         'price-class',
-        'origin-price-class'
+        'origin-price-class',
     ],
     mixins: [link_1.link],
     props: {
@@ -20,7 +20,7 @@ component_1.VantComponent({
         title: String,
         price: {
             type: String,
-            observer: 'updatePrice'
+            observer: 'updatePrice',
         },
         centered: Boolean,
         lazyLoad: Boolean,
@@ -28,12 +28,12 @@ component_1.VantComponent({
         originPrice: String,
         thumbMode: {
             type: String,
-            value: 'aspectFit'
+            value: 'aspectFit',
         },
         currency: {
             type: String,
-            value: '¥'
-        }
+            value: '¥',
+        },
     },
     methods: {
         updatePrice: function () {
@@ -41,11 +41,11 @@ component_1.VantComponent({
             var priceArr = price.toString().split('.');
             this.setData({
                 integerStr: priceArr[0],
-                decimalStr: priceArr[1] ? "." + priceArr[1] : ''
+                decimalStr: priceArr[1] ? ".".concat(priceArr[1]) : '',
             });
         },
         onClickThumb: function () {
             this.jumpLink('thumbLink');
-        }
-    }
+        },
+    },
 });

@@ -3,6 +3,20 @@
     "miniprogram": {
       "list": [
         {
+          "name": "pages/pay/index",
+          "pathName": "pages/pay/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/card-info/index",
+          "pathName": "pages/card-info/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "pages/order-view/scan-result",
           "pathName": "pages/order-view/scan-result",
           "query": "",
@@ -29,5 +43,6 @@
   "projectname": "%E5%85%83%E6%B0%94%E9%9D%A2%E5%8C%85",
   "setting": {
     "compileHotReLoad": true
-  }
+  },
+  "libVersion": "3.5.3"
 }

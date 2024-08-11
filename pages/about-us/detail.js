@@ -18,6 +18,7 @@ Page({
 
   },
   async cmsPage(key) {
+    // https://www.yuque.com/apifm/nu0f75/utgp8i
     const res = await WXAPI.cmsPage(key)
     if (res.code == 0) {
       this.setData({

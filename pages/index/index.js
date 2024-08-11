@@ -58,6 +58,7 @@ Page({
     })
   },
   async userAmount() {
+    // https://www.yuque.com/apifm/nu0f75/wrqkcb
     const res = await WXAPI.userAmount(wx.getStorageSync('token'))
     if (res.code == 0) {
       this.setData({
@@ -66,6 +67,7 @@ Page({
     }
   },
   async banners() {
+    // https://www.yuque.com/apifm/nu0f75/ms21ki
     const res = await WXAPI.banners()
     if (res.code == 0) {
       this.setData({
@@ -79,6 +81,7 @@ Page({
     })
   },
   async fetchShops(latitude, longitude){
+    // https://www.yuque.com/apifm/nu0f75/vvgeq9
     const res = await WXAPI.fetchShops({
       curlatitude: latitude,
       curlongitude: longitude,

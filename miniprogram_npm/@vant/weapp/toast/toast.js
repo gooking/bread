@@ -11,7 +11,7 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var utils_1 = require("../common/utils");
+var validator_1 = require("../common/validator");
 var defaultOptions = {
     type: 'text',
     mask: false,
@@ -22,12 +22,12 @@ var defaultOptions = {
     position: 'middle',
     forbidClick: false,
     loadingType: 'circular',
-    selector: '#van-toast'
+    selector: '#van-toast',
 };
 var queue = [];
 var currentOptions = __assign({}, defaultOptions);
 function parseOptions(message) {
-    return utils_1.isObj(message) ? message : { message: message };
+    return (0, validator_1.isObj)(message) ? message : { message: message };
 }
 function getContext() {
     var pages = getCurrentPages();
@@ -35,7 +35,9 @@ function getContext() {
 }
 function Toast(toastOptions) {
     var options = __assign(__assign({}, currentOptions), parseOptions(toastOptions));
-    var context = options.context || getContext();
+    var context = (typeof options.context === 'function'
+        ? options.context()
+        : options.context) || getContext();
     var toast = context.selectComponent(options.selector);
     if (!toast) {
         console.warn('未找到 van-toast 节点，请确认 selector 及 context 是否正确');
@@ -52,7 +54,7 @@ function Toast(toastOptions) {
     queue.push(toast);
     toast.setData(options);
     clearTimeout(toast.timer);
-    if (options.duration > 0) {
+    if (options.duration != null && options.duration > 0) {
         toast.timer = setTimeout(function () {
             toast.clear();
             queue = queue.filter(function (item) { return item !== toast; });

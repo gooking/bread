@@ -1,7 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var component_1 = require("../common/component");
-component_1.VantComponent({
+(0, component_1.VantComponent)({
+    classes: ['info-class'],
     props: {
         dot: Boolean,
         info: null,
@@ -10,20 +11,13 @@ component_1.VantComponent({
         customStyle: String,
         classPrefix: {
             type: String,
-            value: 'van-icon'
+            value: 'van-icon',
         },
-        name: {
-            type: String,
-            observer: function (val) {
-                this.setData({
-                    isImageName: val.indexOf('/') !== -1
-                });
-            }
-        }
+        name: String,
     },
     methods: {
         onClick: function () {
             this.$emit('click');
-        }
-    }
+        },
+    },
 });

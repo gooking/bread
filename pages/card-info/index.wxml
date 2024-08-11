@@ -1,10 +1,9 @@
-<view class="sync-bar">
-  <view class="sync-box">
-    <view class="again-sync">再次同步</view>
-    <view class="weixin-sync">与微信同步会员信息</view>
+
+<view class="message-bar" bind:tap="copyID">
+  <view class="title">ID</view>
+  <view class="content">
+    {{ id }}
   </view>
-  <image mode='aspectFill' class='go' src='/images/icon-font-solid-1@2x.png'></image>
-  <button open-type="getUserInfo" bindgetuserinfo="getUserInfo"></button>
 </view>
 
 <view class="blank"></view>
@@ -18,11 +17,10 @@
 
 <view class="blank"></view>
 
-<view class="message-bar">
+<view class="message-bar" bind:tap="bindMobile">
   <view class="title">手机</view>
   <view class="content">
     {{mobile}}
-    <button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber"></button>
   </view>
 </view>
 
@@ -56,3 +54,11 @@
     bind:confirm="birthdayChange"
   />
 </van-popup>
+
+<bind-mobile
+  title="绑定手机号码"
+  alarmText="为保障您的资金安全，请先绑定手机号码"
+  show="{{ bindMobileShow }}"
+  bind:cancel="bindMobileCancel"
+  bind:ok="bindMobileOk"
+/>

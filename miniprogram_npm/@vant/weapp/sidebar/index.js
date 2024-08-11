@@ -1,24 +1,17 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var component_1 = require("../common/component");
-component_1.VantComponent({
-    relation: {
-        name: 'sidebar-item',
-        type: 'descendant',
-        current: 'sidebar',
-        linked: function () {
-            this.setActive(this.data.activeKey);
-        },
-        unlinked: function () {
-            this.setActive(this.data.activeKey);
-        }
-    },
+var relation_1 = require("../common/relation");
+(0, component_1.VantComponent)({
+    relation: (0, relation_1.useChildren)('sidebar-item', function () {
+        this.setActive(this.data.activeKey);
+    }),
     props: {
         activeKey: {
             type: Number,
             value: 0,
-            observer: 'setActive'
-        }
+            observer: 'setActive',
+        },
     },
     beforeCreate: function () {
         this.currentActive = -1;
@@ -38,6 +31,6 @@ component_1.VantComponent({
                 stack.push(children[activeKey].setActive(true));
             }
             return Promise.all(stack);
-        }
-    }
+        },
+    },
 });
