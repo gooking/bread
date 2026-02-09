@@ -9,8 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@vant/weapp": "^1.11.6",
-    "apifm-wxapi": "^24.08.05",
+    "@vant/weapp": "^1.11.7",
+    "apifm-wxapi": "^26.2.5",
     "wxbarcode": "^1.0.2"
   }
 }
